@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
 
+import '../screens/addRessource.dart';
+
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
   @override
@@ -79,7 +81,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => homePage()
+            builder: (context) => addRessource()
         ));
         break;
       case 2:
