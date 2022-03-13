@@ -29,8 +29,8 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16,),
               buildMenuItem(
-                  text: 'PARTAGER UNE RESSOURCE',
-                  icon: Icons.keyboard_arrow_right,
+                  text: 'AJOUTER UNE RESSOURCE',
+                  icon: Icons.add ,
                   onClicked: () => selectedItem(context, 1)
               ),
               const SizedBox(height: 16,),

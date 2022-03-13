@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
+import 'package:share_plus/share_plus.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
@@ -14,6 +15,12 @@ class addRessource extends StatefulWidget {
 
 class _addRessourceState extends State<addRessource> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  final String _content =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum diam ipsum, lobortis quis ultricies non, lacinia at justo.';
+
+  void _shareContent() {
+    Share.share(_content);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +82,7 @@ class _addRessourceState extends State<addRessource> {
                                       borderRadius: BorderRadius.circular(20)
                                   )
                               ),
-                              onPressed: () {} ,
+                              onPressed: _shareContent,
                               child: const Text('PARTAGER')
                           ),
                         ],
@@ -104,6 +111,22 @@ class _addRessourceState extends State<addRessource> {
                             ),
                           ),
                           const SizedBox(height: 10),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  textStyle: GoogleFonts.zenKurenaido(
+                                    textStyle: const TextStyle(fontSize: 23),
+                                  ),
+                                  primary: Colors.white,
+                                  onPrimary: bleu_txt,
+                                  fixedSize: const Size(250, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)
+                                  )
+                              ),
+                              onPressed: (){},
+                              child: const Text('Ajouter'),
+
+                          ),
                         ]
                     ),
                   ),
