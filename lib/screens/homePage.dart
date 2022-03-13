@@ -12,21 +12,17 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 34),
                   Container(
                       alignment: Alignment.center,
                       width: double.infinity,
@@ -40,33 +36,47 @@ class _homePageState extends State<homePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        Text(
-                          "Partager\n vos ressources\n facilement !",
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                          style: GoogleFonts.zenKurenaido(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    _globalKey.currentState?.openEndDrawer();
+                                  },
+                                  icon: const Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                  )
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.end,
+                          ),
+                          Text(
+                            "Partager\n vos ressources\n facilement !",
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            style: GoogleFonts.zenKurenaido(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 30),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: GoogleFonts.zenKurenaido(
+                          SizedBox(height: 30),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  textStyle: GoogleFonts.zenKurenaido(
                                   textStyle: const TextStyle(fontSize: 23),
-                                ),
-                                primary: Colors.white,
-                                onPrimary: bleu_txt,
-                                fixedSize: const Size(250, 50),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)
-                                )
-                            ),
-                            onPressed: () {} ,
-                            child: const Text('PARTAGER')
-                        ),
+                                  ),
+                                  primary: Colors.white,
+                                  onPrimary: bleu_txt,
+                                  fixedSize: const Size(250, 50),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)
+                                  )
+                              ),
+                              onPressed: () {} ,
+                              child: const Text('PARTAGER')
+                          ),
                         ],
                       )
                   ),
