@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:le_cube/screens/login.dart';
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/screens/signup.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class signup extends StatefulWidget {
+  const signup({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _signupState createState() => _signupState();
 }
 
-class _LoginState extends State<Login> {
+class _signupState extends State<signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +26,15 @@ class _LoginState extends State<Login> {
             alignment: WrapAlignment.center,
             runSpacing: 20,
             children: <Widget>[
-              const Image(
-                image: AssetImage('assets/logo.png'),
-                height: 250,
+              Text(
+                'INSCRIPTION',
+                style: GoogleFonts.zenKurenaido(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                    )
+                ),
+
               ),
               TextFormField(
                 style: GoogleFonts.zenKurenaido(
@@ -38,9 +44,31 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 textAlign: TextAlign.center,
-                decoration: textInputDecoration.copyWith(hintText: 'NOM D\'UTILISATEUR'),
+                decoration: textInputDecoration.copyWith(hintText: 'NOM'),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20,),
+              TextFormField(
+                style: GoogleFonts.zenKurenaido(
+                  textStyle: const TextStyle(
+                    color: bleu_txt,
+                    fontSize: 17,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                decoration: textInputDecoration.copyWith(hintText: 'PRENOM'),
+              ),
+              const SizedBox(height: 10,),
+              TextFormField(
+                style: GoogleFonts.zenKurenaido(
+                  textStyle: const TextStyle(
+                    color: bleu_txt,
+                    fontSize: 17,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                decoration: textInputDecoration.copyWith(hintText: 'EMAIL'),
+              ),
+              const SizedBox(height: 10,),
               TextFormField(
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
@@ -51,11 +79,22 @@ class _LoginState extends State<Login> {
                 textAlign: TextAlign.center,
                 decoration: textInputDecoration.copyWith(hintText: 'MOT DE PASSE'),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 10,),
+              TextFormField(
+                style: GoogleFonts.zenKurenaido(
+                  textStyle: const TextStyle(
+                    color: bleu_txt,
+                    fontSize: 17,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                decoration: textInputDecoration.copyWith(hintText: 'CONFIRMATION MOT DE PASSE'),
+              ),
+              const SizedBox(height: 10,),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       textStyle: GoogleFonts.zenKurenaido(
-                        textStyle: const TextStyle(fontSize: 23),
+                        textStyle: const TextStyle(fontSize: 17),
                       ),
                       primary: Colors.white,
                       onPrimary: bleu_txt,
@@ -65,7 +104,7 @@ class _LoginState extends State<Login> {
                       )
                   ),
                   onPressed: () {} ,
-                  child: const Text('CONNEXION')
+                  child: const Text('INSCRIPTION')
               ),
               const SizedBox(height: 15),
               ElevatedButton(
@@ -85,17 +124,15 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const signup()),
+                      MaterialPageRoute(builder: (context) => const Login()),
                     );
                   },
-                  child: const Text('S\'INSCRIRE')
+                  child: const Text('SE CONNECTER')
               ),
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
-
-

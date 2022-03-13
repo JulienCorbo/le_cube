@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
 final textInputDecoration = InputDecoration(
-    labelStyle: GoogleFonts.openSansCondensed(
+    labelStyle: GoogleFonts.zenKurenaido(
       textStyle: const TextStyle(color: bleu_fond),
     ),
-    hintStyle: GoogleFonts.openSansCondensed(
+    hintStyle: GoogleFonts.zenKurenaido(
       textStyle: const TextStyle(color: bleu_fond),
     ),
     fillColor: Colors.white,
