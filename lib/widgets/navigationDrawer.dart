@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -8,19 +10,24 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Material(
-          color: Colors.white,
+          color: bleu_fond,
           child: ListView(
             padding: padding,
             children: <Widget>[
+              const SizedBox(height: 64,),
+              const Image(
+                image: AssetImage('assets/logo.png'),
+                height: 200,
+              ),
               const SizedBox(height: 48,),
               buildMenuItem(
-                  text: 'Accueil',
+                  text: 'ACCUEIL',
                   icon: Icons.home,
                   onClicked: () => selectedItem(context, 0)
               ),
               const SizedBox(height: 16,),
               buildMenuItem(
-                  text: 'Partager une ressource',
+                  text: 'PARTAGER UNE RESSOURCE',
                   icon: Icons.keyboard_arrow_right,
                   onClicked: () => selectedItem(context, 1)
               ),
@@ -40,11 +47,23 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = Colors.black;
+    final color = bleu_txt;
     final hoverColor = Colors.grey;
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: TextStyle(color: color)),
+      title: Text(
+          text,
+          style: GoogleFonts.zenKurenaido(
+              textStyle: const TextStyle(
+                  fontSize: 14,
+                  color: bleu_txt
+              )
+          ),
+      ),
+      tileColor: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
+      ),
       hoverColor: hoverColor,
       onTap: onClicked,
     );

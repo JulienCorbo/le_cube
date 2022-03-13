@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
@@ -85,11 +86,12 @@ class _homePageState extends State<homePage> {
                     alignment: Alignment.center,
                     width: double.infinity,
                     height: 500,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: bleu_fond,
                     ),
                     child: Column(
                         children: [
+                          SizedBox(height: 10),
                           Text(
                             "A LA UNE",
                             textAlign: TextAlign.center,
@@ -101,10 +103,83 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 10),
+                          CarouselSlider(
+                              items: [
+                                Container(
+                                  width: 400,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'TITRE 1',
+                                        style: GoogleFonts.zenKurenaido(
+                                          textStyle: const TextStyle(
+                                            color: bleu_txt,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: 400,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'TITRE 2',
+                                        style: GoogleFonts.zenKurenaido(
+                                          textStyle: const TextStyle(
+                                            color: bleu_txt,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: 400,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'TITRE 3',
+                                        style: GoogleFonts.zenKurenaido(
+                                          textStyle: const TextStyle(
+                                            color: bleu_txt,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                              options: CarouselOptions(
+                                enlargeCenterPage: true,
+                                enableInfiniteScroll: false,
+                                height: 400
+                              ),
+                          )
                         ]
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     "BESOIN D'AIDE ?\n VOUS AVEZ UNE QUESTION ?",
                     textAlign: TextAlign.center,
