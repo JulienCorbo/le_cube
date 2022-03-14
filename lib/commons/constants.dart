@@ -24,3 +24,4 @@ final textInputDecoration = InputDecoration(
 const bleu_btn = Color(0xFF0741AD);
 const bleu_fond = Color(0xFF265CB8);
 const bleu_txt = Color(0xFF5880C9);
+const blanc_fond = Color(0xFFF7F9F9);

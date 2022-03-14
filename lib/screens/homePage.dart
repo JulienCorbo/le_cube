@@ -17,6 +17,7 @@ class _homePageState extends State<homePage> {
 @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: blanc_fond,
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
         body: LayoutBuilder(
@@ -180,35 +181,187 @@ class _homePageState extends State<homePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text(
-                    "BESOIN D'AIDE ?\n VOUS AVEZ UNE QUESTION ?",
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: GoogleFonts.zenKurenaido(
-                      textStyle: const TextStyle(
-                        color: bleu_txt,
-                        fontSize: 28,
-                      ),
+                  Container(
+                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
+                      alignment: Alignment.center,
+                      constraints: BoxConstraints(maxHeight: double.infinity),
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                      color: bleu_fond,
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        Container(
+                          height: 200,
+                          width: 400,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text( "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec euismod eros. Sed interdum orci lacus, vitae facilisis augue laoreet in. Suspendisse sit amet orci mauris. Duis rutrum consectetur nulla, sit amet pharetra nibh rhoncus at. Sed auctor auctor blandit. Maecenas consectetur dignissim tempus. Donec sed efficitur purus. Vestibulum accumsan sem mauris, sed posuere sem malesuada sed. Vestibulum dapibus posuere sem sit amet rutrum. Sed pellentesque leo vitae dolor cursus, vitae iaculis metus auctor.",
+                          textAlign: TextAlign.justify,
+                          style: GoogleFonts.zenKurenaido(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    )
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Text(
+                          "SELECTIONNER UNE CATEGORIE",
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style: GoogleFonts.zenKurenaido(
+                            textStyle: const TextStyle(
+                              color: bleu_txt,
+                              fontSize: 26,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        CarouselSlider(
+                          items: [
+                            Container(
+                              width: 400,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'CATEGORIE 1',
+                                    style: GoogleFonts.zenKurenaido(
+                                      textStyle: const TextStyle(
+                                        color: bleu_txt,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 400,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'CATEGORIE 2',
+                                    style: GoogleFonts.zenKurenaido(
+                                      textStyle: const TextStyle(
+                                        color: bleu_txt,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 400,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'CATEGORIE 3',
+                                    style: GoogleFonts.zenKurenaido(
+                                      textStyle: const TextStyle(
+                                        color: bleu_txt,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                          options: CarouselOptions(
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                              height: 400
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                textStyle: GoogleFonts.zenKurenaido(
+                                    textStyle: const TextStyle(fontSize: 19)
+                                ),
+                                primary: bleu_btn,
+                                onPrimary: Colors.white,
+                                fixedSize: const Size(250, 50),
+                                side: const BorderSide(color: Colors.white, width: 0.7),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)
+                                )
+                            ),
+                            onPressed: () {} ,
+                            child: const Text('VOIR PLUS')
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          textStyle: GoogleFonts.zenKurenaido(
-                              textStyle: const TextStyle(fontSize: 17)
+                  const SizedBox(height: 20),
+                  Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          "BESOIN D'AIDE ?\n VOUS AVEZ UNE QUESTION ?",
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style: GoogleFonts.zenKurenaido(
+                            textStyle: const TextStyle(
+                              color: bleu_txt,
+                              fontSize: 22,
+                            ),
                           ),
-                          primary: bleu_btn,
-                          onPrimary: Colors.white,
-                          fixedSize: const Size(250, 50),
-                          side: const BorderSide(color: Colors.white, width: 0.7),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                          )
-                      ),
-                      onPressed: () {} ,
-                      child: const Text('SOUMETTRE UNE DEMANDE')
-                  ),
-                  SizedBox(height: 20),
+                        ),
+                        SizedBox(height: 15),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                textStyle: GoogleFonts.zenKurenaido(
+                                    textStyle: const TextStyle(fontSize: 19)
+                                ),
+                                primary: bleu_btn,
+                                onPrimary: Colors.white,
+                                fixedSize: const Size(300, 60),
+                                side: const BorderSide(color: Colors.white, width: 0.7),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)
+                                )
+                            ),
+                            onPressed: () {} ,
+                            child: const Text('SOUMETTRE UNE DEMANDE')
+                        ),
+                        SizedBox(height: 20),
+                      ],
+                    ),
+                  )
                 ],
               ),
             );
