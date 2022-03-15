@@ -17,7 +17,7 @@ class _homePageState extends State<homePage> {
 @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: blanc_fond,
+        backgroundColor: whiteBackground,
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
         body: LayoutBuilder(
@@ -65,17 +65,7 @@ class _homePageState extends State<homePage> {
                           ),
                           SizedBox(height: 30),
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  textStyle: GoogleFonts.zenKurenaido(
-                                  textStyle: const TextStyle(fontSize: 23),
-                                  ),
-                                  primary: Colors.white,
-                                  onPrimary: bleu_txt,
-                                  fixedSize: const Size(250, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                  )
-                              ),
+                              style: buttonWhite,
                               onPressed: () {} ,
                               child: const Text('PARTAGER')
                           ),
@@ -88,7 +78,7 @@ class _homePageState extends State<homePage> {
                     width: double.infinity,
                     height: 500,
                     decoration: const BoxDecoration(
-                      color: bleu_fond,
+                      color: blueBackground,
                     ),
                     child: Column(
                         children: [
@@ -107,74 +97,15 @@ class _homePageState extends State<homePage> {
                           const SizedBox(height: 10),
                           CarouselSlider(
                               items: [
-                                Container(
-                                  width: 400,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'TITRE 1',
-                                        style: GoogleFonts.zenKurenaido(
-                                          textStyle: const TextStyle(
-                                            color: bleu_txt,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 400,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.white
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'TITRE 2',
-                                        style: GoogleFonts.zenKurenaido(
-                                          textStyle: const TextStyle(
-                                            color: bleu_txt,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 400,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'TITRE 3',
-                                        style: GoogleFonts.zenKurenaido(
-                                          textStyle: const TextStyle(
-                                            color: bleu_txt,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                spotlightElement(title: 'Comment demander un prêt bancaire ?',category: 'BANQUE', icon: Icons.account_balance),
+                                spotlightElement(title: '', category: 'ARCHITECTURE', icon: Icons.architecture),
+                                spotlightElement(title: 'Lettre préavis pré-remplie', category: 'FICHIERS', icon: Icons.attach_file)
                               ],
                               options: CarouselOptions(
-                                enlargeCenterPage: true,
-                                enableInfiniteScroll: false,
-                                height: 400
+                                  initialPage: 0,
+                                  enlargeCenterPage: true,
+                                  enableInfiniteScroll: false,
+                                  height: 400
                               ),
                           )
                         ]
@@ -184,18 +115,22 @@ class _homePageState extends State<homePage> {
                   Container(
                       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
                       alignment: Alignment.center,
-                      constraints: BoxConstraints(maxHeight: double.infinity),
+                      constraints: const BoxConstraints(maxHeight: double.infinity),
                       width: double.infinity,
                       decoration: const BoxDecoration(
-                      color: bleu_fond,
+                      color: blueBackground,
                     ),
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
                         Container(
                           height: 200,
-                          width: 400,
+                          width: 380,
                           decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage('assets/pres_RR.jpg'),
+                              fit: BoxFit.fill,
+                            ),
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white
                           ),
@@ -220,12 +155,12 @@ class _homePageState extends State<homePage> {
                     child: Column(
                       children: [
                         Text(
-                          "SELECTIONNER UNE CATEGORIE",
+                          "CATÉGORIE A LA UNE",
                           textAlign: TextAlign.center,
                           softWrap: true,
                           style: GoogleFonts.zenKurenaido(
                             textStyle: const TextStyle(
-                              color: bleu_txt,
+                              color: blueText,
                               fontSize: 26,
                             ),
                           ),
@@ -233,69 +168,9 @@ class _homePageState extends State<homePage> {
                         const SizedBox(height: 20),
                         CarouselSlider(
                           items: [
-                            Container(
-                              width: 400,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'CATEGORIE 1',
-                                    style: GoogleFonts.zenKurenaido(
-                                      textStyle: const TextStyle(
-                                        color: bleu_txt,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 400,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'CATEGORIE 2',
-                                    style: GoogleFonts.zenKurenaido(
-                                      textStyle: const TextStyle(
-                                        color: bleu_txt,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 400,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'CATEGORIE 3',
-                                    style: GoogleFonts.zenKurenaido(
-                                      textStyle: const TextStyle(
-                                        color: bleu_txt,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
+                            categoryElement(icon: Icons.account_balance, categoryTitle: 'BANQUE', nbrRessource: '25'),
+                            categoryElement(icon: Icons.architecture, categoryTitle: 'ARCHITECTURE', nbrRessource: '17'),
+                            categoryElement(icon: Icons.attach_file, categoryTitle: 'FICHIERS', nbrRessource: '34'),
                           ],
                           options: CarouselOptions(
                               enlargeCenterPage: true,
@@ -305,20 +180,9 @@ class _homePageState extends State<homePage> {
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 19)
-                                ),
-                                primary: bleu_btn,
-                                onPrimary: Colors.white,
-                                fixedSize: const Size(250, 50),
-                                side: const BorderSide(color: Colors.white, width: 0.7),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)
-                                )
-                            ),
+                            style: buttonBlue,
                             onPressed: () {} ,
-                            child: const Text('VOIR PLUS')
+                            child: const Text('PLUS DE CATÉGORIES')
                         ),
                       ],
                     ),
@@ -336,29 +200,18 @@ class _homePageState extends State<homePage> {
                           softWrap: true,
                           style: GoogleFonts.zenKurenaido(
                             textStyle: const TextStyle(
-                              color: bleu_txt,
+                              color: blueText,
                               fontSize: 22,
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 19)
-                                ),
-                                primary: bleu_btn,
-                                onPrimary: Colors.white,
-                                fixedSize: const Size(300, 60),
-                                side: const BorderSide(color: Colors.white, width: 0.7),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)
-                                )
-                            ),
+                            style: buttonBlue,
                             onPressed: () {} ,
                             child: const Text('SOUMETTRE UNE DEMANDE')
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   )

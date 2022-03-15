@@ -12,7 +12,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Material(
-          color: bleu_fond,
+          color: blueBackground,
           child: ListView(
             padding: padding,
             children: <Widget>[
@@ -49,7 +49,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = bleu_txt;
+    final color = blueText;
     final hoverColor = Colors.grey;
     return ListTile(
       leading: Icon(icon, color: color),
@@ -58,7 +58,7 @@ class NavigationDrawerWidget extends StatelessWidget {
           style: GoogleFonts.zenKurenaido(
               textStyle: const TextStyle(
                   fontSize: 14,
-                  color: bleu_txt
+                  color: blueText
               )
           ),
       ),
@@ -76,17 +76,17 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => homePage()
+            builder: (context) => const homePage()
         ));
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => addRessource()
+            builder: (context) => const addRessource()
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => homePage()
+            builder: (context) => const homePage()
         ));
     }
   }

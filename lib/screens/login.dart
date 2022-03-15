@@ -15,7 +15,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bleu_fond,
+      backgroundColor: blueBackground,
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 30),
@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
               TextFormField(
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
-                    color: bleu_txt,
+                    color: blueText,
                     fontSize: 17,
                   ),
                 ),
@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
               TextFormField(
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
-                    color: bleu_txt,
+                    color: blueText,
                     fontSize: 17,
                   ),
                 ),
@@ -53,35 +53,13 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 100),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      textStyle: GoogleFonts.zenKurenaido(
-                        textStyle: const TextStyle(fontSize: 23),
-                      ),
-                      primary: Colors.white,
-                      onPrimary: bleu_txt,
-                      fixedSize: const Size(250, 50),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                      )
-                  ),
+                  style: buttonWhite,
                   onPressed: () {} ,
                   child: const Text('CONNEXION')
               ),
               const SizedBox(height: 15),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      textStyle: GoogleFonts.zenKurenaido(
-                          textStyle: const TextStyle(fontSize: 17)
-                      ),
-                      primary: bleu_btn,
-                      onPrimary: Colors.white,
-                      fixedSize: const Size(250, 50),
-                      side: const BorderSide(color: Colors.white, width: 0.7),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                      )
-                  ),
-
+                  style: buttonBlue,
                   onPressed: () {
                     Navigator.push(
                       context,

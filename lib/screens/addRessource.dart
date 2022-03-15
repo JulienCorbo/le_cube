@@ -71,17 +71,7 @@ class _addRessourceState extends State<addRessource> {
                           ),
                           SizedBox(height: 30),
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 23),
-                                  ),
-                                  primary: Colors.white,
-                                  onPrimary: bleu_txt,
-                                  fixedSize: const Size(250, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                  )
-                              ),
+                              style: buttonWhite,
                               onPressed: _shareContent,
                               child: const Text('PARTAGER')
                           ),
@@ -94,7 +84,7 @@ class _addRessourceState extends State<addRessource> {
                     width: double.infinity,
                     height: 500,
                     decoration: const BoxDecoration(
-                      color: bleu_fond,
+                      color: blueBackground,
                     ),
                     child: Column(
                         children: [
@@ -112,17 +102,7 @@ class _addRessourceState extends State<addRessource> {
                           ),
                           const SizedBox(height: 10),
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 23),
-                                  ),
-                                  primary: Colors.white,
-                                  onPrimary: bleu_txt,
-                                  fixedSize: const Size(250, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                  )
-                              ),
+                              style: buttonWhite,
                               onPressed: (){},
                               child: const Text('Ajouter'),
 
@@ -137,25 +117,14 @@ class _addRessourceState extends State<addRessource> {
                     softWrap: true,
                     style: GoogleFonts.zenKurenaido(
                       textStyle: const TextStyle(
-                        color: bleu_txt,
+                        color: blueText,
                         fontSize: 28,
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          textStyle: GoogleFonts.zenKurenaido(
-                              textStyle: const TextStyle(fontSize: 17)
-                          ),
-                          primary: bleu_btn,
-                          onPrimary: Colors.white,
-                          fixedSize: const Size(250, 50),
-                          side: const BorderSide(color: Colors.white, width: 0.7),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                          )
-                      ),
+                      style: buttonBlue,
                       onPressed: () {} ,
                       child: const Text('SOUMETTRE UNE DEMANDE')
                   ),
