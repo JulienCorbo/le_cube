@@ -17,12 +17,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0
   share_plus: ^3.1.0
+  video_player: ^2.2.19
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^1.0.0
+  flutter_native_splash: ^2.0.5
 
 flutter:
 
@@ -31,4 +33,5 @@ flutter:
   assets:
     - assets/logo.png
     - assets/hand_fond.png
+    - assets/splashscreen.mp4
 
