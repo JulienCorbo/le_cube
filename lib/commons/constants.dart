@@ -50,6 +50,77 @@ final textStyle = GoogleFonts.zenKurenaido(
   ),
 );
 
+Widget categoryElementPage1({
+  required String title,
+  required IconData? icon,
+}) => Container(
+  width: 170,
+  height: 170,
+  decoration: BoxDecoration(
+      border: Border.all(width: 2.0, color: blueBorder),
+      borderRadius: BorderRadius.circular(25),
+  ),
+  child: SizedBox.fromSize(
+    size: Size(56, 56),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          splashColor: blueText, // splash color
+          onTap: () {}, // button pressed
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: blueIcon,
+                size: 64,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                  title,
+                  style: textStyle.copyWith(fontSize: 22)
+              ),
+            ],
+          ),
+        ),
+  )
+);
+
+Widget categoryElementPage2({
+  required String title,
+  required IconData? icon,
+}) => Container(
+    width: 350,
+    height: 90,
+    decoration: BoxDecoration(
+      border: Border.all(width: 2.0, color: blueBorder),
+      borderRadius: BorderRadius.circular(25),
+    ),
+    child: SizedBox.fromSize(
+      size: Size(56, 56),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        splashColor: blueText, // splash color
+        onTap: () {}, // button pressed
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(width: 25),
+            Icon(
+              icon,
+              color: blueIcon,
+              size: 64,
+            ),
+            const SizedBox(width: 10),
+            Text(
+                title,
+                style: textStyle.copyWith(fontSize: 22)
+            ),
+          ],
+        ),
+      ),
+    )
+);
+
 Widget spotlightElement({
   required String title,
   required String category,

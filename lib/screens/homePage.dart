@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:le_cube/commons/constants.dart';
+import 'package:le_cube/screens/category.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
 
 class homePage extends StatefulWidget {
@@ -181,7 +182,11 @@ class _homePageState extends State<homePage> {
                         const SizedBox(height: 20),
                         ElevatedButton(
                             style: buttonBlue,
-                            onPressed: () {} ,
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const categoryPage()
+                              ));
+                              } ,
                             child: const Text('PLUS DE CATÉGORIES')
                         ),
                       ],

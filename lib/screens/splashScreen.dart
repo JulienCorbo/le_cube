@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _playVideo() async{
     _controller.play();
 
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(milliseconds: 5350));
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const homePage()
