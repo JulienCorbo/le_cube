@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
-
+import 'package:le_cube/screens/category.dart';
 import '../screens/addRessource.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -35,9 +35,15 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16,),
               buildMenuItem(
-                  text: 'F.A.Q',
+                  text: 'CATEGORIES',
                   icon: Icons.keyboard_arrow_right,
                   onClicked: () => selectedItem(context, 2)
+              ),
+              const SizedBox(height: 16,),
+              buildMenuItem(
+                  text: 'F.A.Q',
+                  icon: Icons.keyboard_arrow_right,
+                  onClicked: () => selectedItem(context, 3)
               ),
             ],
           ),
@@ -85,6 +91,11 @@ class NavigationDrawerWidget extends StatelessWidget {
         ));
         break;
       case 2:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const categoryPage()
+        ));
+        break;
+      case 3:
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const homePage()
         ));

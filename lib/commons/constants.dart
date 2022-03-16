@@ -57,6 +57,7 @@ Widget spotlightElement({
 }) => ClipRect(
   child:
   Container(
+    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 40),
     width: 400,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -88,6 +89,42 @@ Widget spotlightElement({
             style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
+        const SizedBox(height: 10, width: double.infinity),
+        Text(
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget enim leo. Sed eu tortor malesuada enim feugiat tincidunt. Cras viverra lorem quis pulvinar aliquam. Mauris posuere, libero et tempus luctus, tortor nibh viverra quam, a congue ex erat nec sem. Morbi quis eleifend turpis. ',
+          style: textStyle.copyWith(fontSize: 14),
+          textAlign: TextAlign.justify,
+        ),
+        const SizedBox(height: 20, width: double.infinity),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              iconSize: 48,
+              onPressed: () {},
+              icon: const Icon(Icons.star_outline_rounded),
+              color: blueButton,
+            ),
+            const SizedBox(width: 20),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    textStyle: GoogleFonts.zenKurenaido(
+                        textStyle: const TextStyle(fontSize: 14)
+                    ),
+                    primary: blueButton,
+                    onPrimary: Colors.white,
+                    fixedSize: const Size(120, 30),
+                    side: const BorderSide(color: Colors.white, width: 0.7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                    )
+                ),
+                onPressed: () {},
+                child: Text('VOIR PLUS')
+            )
+          ],
+        ),
+
       ],
     ),
   ),
@@ -154,6 +191,10 @@ Widget categoryElement({
   ),
   )
 );
+
+void fav_button() {
+
+}
 
 const blueButton = Color(0xFF0741AD);
 const blueBackground = Color(0xFF265CB8);

@@ -63,7 +63,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           ElevatedButton(
                               style: buttonWhite,
                               onPressed: () {} ,
@@ -72,7 +72,7 @@ class _homePageState extends State<homePage> {
                         ],
                       )
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     alignment: Alignment.center,
                     width: double.infinity,
@@ -82,7 +82,7 @@ class _homePageState extends State<homePage> {
                     ),
                     child: Column(
                         children: [
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             "A LA UNE",
                             textAlign: TextAlign.center,
@@ -97,15 +97,15 @@ class _homePageState extends State<homePage> {
                           const SizedBox(height: 10),
                           CarouselSlider(
                               items: [
-                                spotlightElement(title: 'Comment demander un prêt bancaire ?',category: 'BANQUE', icon: Icons.account_balance),
-                                spotlightElement(title: '', category: 'ARCHITECTURE', icon: Icons.architecture),
-                                spotlightElement(title: 'Lettre préavis pré-remplie', category: 'FICHIERS', icon: Icons.attach_file)
+                                spotlightElement(title: 'Lorem ipsum',category: 'BANQUE', icon: Icons.account_balance),
+                                spotlightElement(title: 'Lorem ipsum', category: 'ARCHITECTURE', icon: Icons.architecture),
+                                spotlightElement(title: 'Lorem ipsum', category: 'FICHIERS', icon: Icons.attach_file)
                               ],
                               options: CarouselOptions(
                                   initialPage: 0,
                                   enlargeCenterPage: true,
                                   enableInfiniteScroll: false,
-                                  height: 400
+                                  height: 380
                               ),
                           )
                         ]
