@@ -44,13 +44,19 @@ final textInputDecoration = InputDecoration(
     )
 );
 
+final errorTextStyle = GoogleFonts.zenKurenaido(
+  textStyle: const TextStyle(
+    color: Colors.red,
+  )
+);
+
 final textStyle = GoogleFonts.zenKurenaido(
   textStyle: const TextStyle(
     color: blueText,
   ),
 );
 
-Widget categoryElementPage1({
+Widget categoryElementPage({
   required String title,
   required IconData? icon,
 }) => Container(
@@ -83,42 +89,6 @@ Widget categoryElementPage1({
           ),
         ),
   )
-);
-
-Widget categoryElementPage2({
-  required String title,
-  required IconData? icon,
-}) => Container(
-    width: 350,
-    height: 90,
-    decoration: BoxDecoration(
-      border: Border.all(width: 2.0, color: blueBorder),
-      borderRadius: BorderRadius.circular(25),
-    ),
-    child: SizedBox.fromSize(
-      size: Size(56, 56),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        splashColor: blueText, // splash color
-        onTap: () {}, // button pressed
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(width: 25),
-            Icon(
-              icon,
-              color: blueIcon,
-              size: 64,
-            ),
-            const SizedBox(width: 10),
-            Text(
-                title,
-                style: textStyle.copyWith(fontSize: 22)
-            ),
-          ],
-        ),
-      ),
-    )
 );
 
 Widget spotlightElement({

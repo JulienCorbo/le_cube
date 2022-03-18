@@ -12,6 +12,9 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Material(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomLeft: Radius.circular(40))
+          ),
           color: blueBackground,
           child: ListView(
             padding: padding,
@@ -55,15 +58,15 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = blueText;
-    final hoverColor = Colors.grey;
+    const color = blueText;
+    const hoverColor = Colors.grey;
     return ListTile(
       leading: Icon(icon, color: color),
       title: Text(
           text,
           style: GoogleFonts.zenKurenaido(
               textStyle: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: blueText
               )
           ),

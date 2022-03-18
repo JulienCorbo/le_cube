@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:le_cube/screens/splashScreen.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RR',
       theme: ThemeData(
+        //canvasColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const Login(),
     );
   }
 }

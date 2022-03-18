@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:le_cube/commons/constants.dart';
 
 import 'package:le_cube/commons/constants.dart';
+import 'package:le_cube/widgets/navigationDrawer.dart';
+import 'package:le_cube/screens/homePage.dart';
 
 class categoryPage extends StatefulWidget {
   const categoryPage({Key? key}) : super(key: key);
@@ -15,11 +16,13 @@ class _categoryPageState extends State<categoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        endDrawer: NavigationDrawerWidget(),
+        backgroundColor: whiteBackground,
         key: _globalKey,
         body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints){
           return SingleChildScrollView(
-            child: Column(
+              child: Column(
               children: [
                 Container(
                   height: 100,
@@ -27,9 +30,21 @@ class _categoryPageState extends State<categoryPage> {
                   decoration: const BoxDecoration(
                     color: blueBackground,
                   ),
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 35, width: double.infinity,),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const homePage()
+                            ));
+                            },
+                          icon: const Icon(
+                              Icons.keyboard_arrow_left,
+                            size: 40.0,
+                            color: Colors.white,
+                          )
+                      ),
                       Text(
                         'CATEGORIES',
                         style: textStyle.copyWith(fontSize: 40, color: Colors.white),
@@ -47,41 +62,62 @@ class _categoryPageState extends State<categoryPage> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage1(icon: Icons.account_balance, title: 'BANQUE'),
+                                categoryElementPage(icon: Icons.account_balance_rounded, title: 'BANQUE'),
                                 const SizedBox(width: 20),
-                                categoryElementPage1(icon: Icons.architecture, title: 'ARCHITECTURE')
+                                categoryElementPage(icon: Icons.architecture, title: 'ARCHITECTURE')
                               ]
                           ),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage1(icon: Icons.attach_file, title: 'FICHIERS'),
+                                categoryElementPage(icon: Icons.attach_file, title: 'FICHIERS'),
                                 const SizedBox(width: 20),
-                                categoryElementPage1(icon: Icons.music_note_rounded, title: 'MUSIQUE')
+                                categoryElementPage(icon: Icons.music_note_rounded, title: 'MUSIQUE')
                               ]
                           ),
                           const SizedBox(height: 20),
-                          const Divider(thickness: 2),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                categoryElementPage(icon: Icons.menu_book_rounded , title: 'LITTÉRATURE'),
+                                const SizedBox(width: 20),
+                                categoryElementPage(icon: Icons.theater_comedy , title: 'CULTURE')
+                              ]
+                          ),
                           const SizedBox(height: 20),
-                          Column(
-                            children: [
-                              categoryElementPage2(icon: Icons.account_balance, title: 'BANQUE'),
-                              const SizedBox(height: 15),
-                              categoryElementPage2(icon: Icons.architecture, title: 'ARCHITECTURE'),
-                              const SizedBox(height: 15),
-                              categoryElementPage2(icon: Icons.attach_file, title: 'FICHIERS'),
-                              const SizedBox(height: 15),
-                              categoryElementPage2(icon: Icons.music_note_rounded, title: 'MUSIQUE')
-                            ],
-                          )
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                categoryElementPage(icon: Icons.science_rounded , title: 'SCIENCE'),
+                                const SizedBox(width: 20),
+                                categoryElementPage(icon: Icons.skateboarding_rounded , title: 'JEUNESSE')
+                              ]
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                categoryElementPage(icon: Icons.military_tech_rounded , title: 'HISTOIRE'),
+                                const SizedBox(width: 20),
+                                categoryElementPage(icon: Icons.park_rounded , title: 'NATURE')
+                              ]
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                categoryElementPage(icon: Icons.military_tech_rounded , title: 'HISTOIRE'),
+                              ]
+                          ),
                         ],
                       ),
+
                     );
                   }
                   )
               ],
-            ),
+              ),
           );
         }
         )

@@ -34,7 +34,8 @@ class _homePageState extends State<homePage> {
                           image: DecorationImage(
                               image: AssetImage('assets/hand_fond.png'),
                               fit: BoxFit.cover
-                          )
+                          ),
+                        border: Border(bottom: BorderSide(color: blueBorder, width:4 ))
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +78,7 @@ class _homePageState extends State<homePage> {
                   Container(
                     alignment: Alignment.center,
                     width: double.infinity,
-                    height: 500,
+                    height: 470,
                     decoration: const BoxDecoration(
                       color: blueBackground,
                     ),
@@ -128,8 +129,8 @@ class _homePageState extends State<homePage> {
                           height: 200,
                           width: 380,
                           decoration: BoxDecoration(
-                            image: const DecorationImage(
-                              image: AssetImage('assets/pres_RR.jpg'),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/pres_RR.jpg'),
                               fit: BoxFit.fill,
                             ),
                               borderRadius: BorderRadius.circular(20),
@@ -194,7 +195,10 @@ class _homePageState extends State<homePage> {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    color: Colors.white,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                        border: Border(top: BorderSide(color: blueBorder, width:4 ))
+                    ),
                     width: double.infinity,
                     child: Column(
                       children: [

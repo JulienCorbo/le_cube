@@ -24,6 +24,7 @@ class _addRessourceState extends State<addRessource> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: whiteBackground,
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
         body: LayoutBuilder(
