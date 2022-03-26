@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
@@ -13,41 +15,88 @@ class NavigationDrawerWidget extends StatelessWidget {
     return Drawer(
         child: Material(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomLeft: Radius.circular(40))
           ),
           color: blueBackground,
           child: ListView(
             padding: padding,
             children: <Widget>[
               const SizedBox(height: 64,),
-              const Image(
-                image: AssetImage('assets/logo.png'),
-                height: 200,
+              InkWell(
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const homePage()
+                )),
+                child: const Image(
+                  image: AssetImage('assets/logo.png'),
+                  height: 200,
+                ),
               ),
-              const SizedBox(height: 48,),
+
+              const SizedBox(height: 48),
               buildMenuItem(
                   text: 'ACCUEIL',
-                  icon: Icons.home,
+                  icon: FontAwesomeIcons.home,
                   onClicked: () => selectedItem(context, 0)
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(height: 16),
               buildMenuItem(
                   text: 'AJOUTER UNE RESSOURCE',
-                  icon: Icons.add ,
+                  icon: FontAwesomeIcons.plus ,
                   onClicked: () => selectedItem(context, 1)
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(height: 16),
               buildMenuItem(
                   text: 'CATEGORIES',
-                  icon: Icons.keyboard_arrow_right,
+                  icon: FontAwesomeIcons.arrowRight,
                   onClicked: () => selectedItem(context, 2)
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(height: 16),
               buildMenuItem(
                   text: 'F.A.Q',
-                  icon: Icons.keyboard_arrow_right,
+                  icon: FontAwesomeIcons.question,
                   onClicked: () => selectedItem(context, 3)
               ),
+              const SizedBox(height: 32),
+              const Divider(thickness: 2, color: Colors.white),
+              const SizedBox(height: 32),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(
+                        FontAwesomeIcons.instagram,
+                        color: Colors.white,
+                        size: 28,
+                      )
+                  ),
+                  const SizedBox(width: 20),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(
+                        FontAwesomeIcons.facebook,
+                        color: Colors.white,
+                        size: 28,
+                      )
+                  ),
+                  SizedBox(width: 20),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(
+                        FontAwesomeIcons.linkedin,
+                        color: Colors.white,
+                        size: 28,
+                      )
+                  ),
+                  SizedBox(width: 20),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(
+                        Icons.mail,
+                        color: Colors.white,
+                        size: 28,
+                      )
+                  ),
+                ],
+              )
             ],
           ),
         )
@@ -61,7 +110,11 @@ class NavigationDrawerWidget extends StatelessWidget {
     const color = blueText;
     const hoverColor = Colors.grey;
     return ListTile(
-      leading: Icon(icon, color: color),
+      leading: Icon(
+        icon,
+        color: color,
+        size: 20,
+      ),
       title: Text(
           text,
           style: GoogleFonts.zenKurenaido(

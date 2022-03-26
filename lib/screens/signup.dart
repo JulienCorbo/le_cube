@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:form_validator/form_validator.dart';
 
 import 'package:le_cube/screens/login.dart';
 import 'package:le_cube/commons/constants.dart';
@@ -76,6 +77,7 @@ class _signupState extends State<signup> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> _form = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: blueBackground,
       body: Container(
@@ -83,6 +85,7 @@ class _signupState extends State<signup> {
         padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 30),
         width: 400,
         child: Form(
+          key: _form,
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
             alignment: WrapAlignment.center,
@@ -98,6 +101,8 @@ class _signupState extends State<signup> {
                 ),
               ),
               TextFormField(
+                validator: ValidationBuilder().regExp(RegExp(r'^[A-Za-z][A-Za-z0-9_]{4,29}$'), nameController.value.text).build(),
+                textInputAction: TextInputAction.next,
                 controller: nameController,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
@@ -110,6 +115,7 @@ class _signupState extends State<signup> {
               ),
               const SizedBox(height: 20,),
               TextFormField(
+                textInputAction: TextInputAction.next,
                 controller: firstnameController,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
@@ -122,6 +128,8 @@ class _signupState extends State<signup> {
               ),
               const SizedBox(height: 10,),
               TextFormField(
+                validator: ValidationBuilder().email('Format du mail incorrect.').build(),
+                textInputAction: TextInputAction.next,
                 controller: emailController,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
@@ -134,6 +142,8 @@ class _signupState extends State<signup> {
               ),
               const SizedBox(height: 10,),
               TextFormField(
+                textInputAction: TextInputAction.next,
+                obscureText: true,
                 controller: passwordController,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
@@ -146,6 +156,8 @@ class _signupState extends State<signup> {
               ),
               const SizedBox(height: 10,),
               TextFormField(
+                textInputAction: TextInputAction.done,
+                obscureText: true,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
                     color: blueText,
@@ -164,15 +176,17 @@ class _signupState extends State<signup> {
               ElevatedButton(
                   style: buttonWhite,
                   onPressed: () {
-                    setState(() {
-                      _futureAlbum = createAlbum(
-                        context,
-                        nameController.value.text,
-                        firstnameController.value.text,
-                        emailController.value.text,
-                        passwordController.value.text
-                      );
-                    });
+                    if (_form.currentState!.validate()) {
+                      setState(() {
+                        _futureAlbum = createAlbum(
+                            context,
+                            nameController.value.text,
+                            firstnameController.value.text,
+                            emailController.value.text,
+                            passwordController.value.text
+                        );
+                      });
+                    }
                   },
                   child: const Text('INSCRIPTION')
               ),
@@ -180,10 +194,10 @@ class _signupState extends State<signup> {
               ElevatedButton(
                   style: buttonBlue,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Login()),
+                      );
                   },
                   child: const Text('SE CONNECTER')
               ),
