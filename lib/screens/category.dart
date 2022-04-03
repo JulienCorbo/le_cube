@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
@@ -62,43 +63,43 @@ class _categoryPageState extends State<categoryPage> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage(icon: Icons.account_balance_rounded, title: 'BANQUE'),
+                                categoryElementPage(icon: FontAwesomeIcons.creditCard, title: 'BANQUE'),
                                 const SizedBox(width: 20),
-                                categoryElementPage(icon: Icons.architecture, title: 'ARCHITECTURE')
+                                categoryElementPage(icon: FontAwesomeIcons.draftingCompass, title: 'ARCHITECTURE')
                               ]
                           ),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage(icon: Icons.attach_file, title: 'FICHIERS'),
+                                categoryElementPage(icon: FontAwesomeIcons.paperclip, title: 'FICHIERS'),
                                 const SizedBox(width: 20),
-                                categoryElementPage(icon: Icons.music_note_rounded, title: 'MUSIQUE')
+                                categoryElementPage(icon: FontAwesomeIcons.music, title: 'MUSIQUE')
                               ]
                           ),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage(icon: Icons.menu_book_rounded , title: 'LITTÉRATURE'),
+                                categoryElementPage(icon: FontAwesomeIcons.book, title: 'LITTÉRATURE'),
                                 const SizedBox(width: 20),
-                                categoryElementPage(icon: Icons.theater_comedy , title: 'CULTURE')
+                                categoryElementPage(icon: FontAwesomeIcons.theaterMasks, title: 'CULTURE')
                               ]
                           ),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage(icon: Icons.science_rounded , title: 'SCIENCE'),
+                                categoryElementPage(icon: FontAwesomeIcons.atom, title: 'SCIENCE'),
                                 const SizedBox(width: 20),
-                                categoryElementPage(icon: Icons.skateboarding_rounded , title: 'JEUNESSE')
+                                categoryElementPage(icon: FontAwesomeIcons.robot, title: 'JEUNESSE')
                               ]
                           ),
                           const SizedBox(height: 20),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:[
-                                categoryElementPage(icon: Icons.military_tech_rounded , title: 'HISTOIRE'),
+                                categoryElementPage(icon: FontAwesomeIcons.robot, title: 'HISTOIRE'),
                                 const SizedBox(width: 20),
                                 categoryElementPage(icon: Icons.park_rounded , title: 'NATURE')
                               ]

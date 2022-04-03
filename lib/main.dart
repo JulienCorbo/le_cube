@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:le_cube/screens/login.dart';
+import 'package:le_cube/screens/homePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         //canvasColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      home: const homePage(),
     );
   }
 }

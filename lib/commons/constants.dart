@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final buttonWhite = ElevatedButton.styleFrom(
@@ -75,10 +76,10 @@ Widget categoryElementPage({
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              FaIcon(
                 icon,
                 color: blueIcon,
-                size: 64,
+                size: 48,
               ),
               const SizedBox(height: 10),
               Text(
@@ -109,10 +110,10 @@ Widget spotlightElement({
       alignment: WrapAlignment.center,
       children: [
         const SizedBox(height: 10, width: double.infinity),
-        Icon(
+        FaIcon(
           icon,
           color: blueIcon,
-          size: 40,
+          size: 36,
         ),
         const SizedBox(width: 10),
         Text(
@@ -141,9 +142,9 @@ Widget spotlightElement({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              iconSize: 48,
+              iconSize: 36,
               onPressed: () {},
-              icon: const Icon(Icons.star_outline_rounded),
+              icon: const FaIcon(FontAwesomeIcons.star),
               color: blueButton,
             ),
             const SizedBox(width: 20),
@@ -189,12 +190,12 @@ Widget categoryElement({
     alignment: WrapAlignment.center,
     children: [
       const SizedBox(height: 15, width: double.infinity),
-      Icon(
+      FaIcon(
         icon,
         color: blueIcon,
-        size: 80,
+        size: 64,
       ),
-      const SizedBox(width: double.infinity),
+      const SizedBox(width: double.infinity, height: 16),
       Text(
         categoryTitle,
         overflow: TextOverflow.ellipsis,

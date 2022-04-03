@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/category.dart';
@@ -99,9 +100,9 @@ class _homePageState extends State<homePage> {
                           const SizedBox(height: 10),
                           CarouselSlider(
                               items: [
-                                spotlightElement(title: 'Lorem ipsum',category: 'BANQUE', icon: Icons.account_balance),
-                                spotlightElement(title: 'Lorem ipsum', category: 'ARCHITECTURE', icon: Icons.architecture),
-                                spotlightElement(title: 'Lorem ipsum', category: 'FICHIERS', icon: Icons.attach_file)
+                                spotlightElement(title: 'Lorem ipsum',category: 'BANQUE', icon: FontAwesomeIcons.creditCard),
+                                spotlightElement(title: 'Lorem ipsum', category: 'ARCHITECTURE', icon: FontAwesomeIcons.draftingCompass),
+                                spotlightElement(title: 'Lorem ipsum', category: 'FICHIERS', icon: FontAwesomeIcons.paperclip)
                               ],
                               options: CarouselOptions(
                                   initialPage: 0,
@@ -170,9 +171,9 @@ class _homePageState extends State<homePage> {
                         const SizedBox(height: 20),
                         CarouselSlider(
                           items: [
-                            categoryElement(icon: Icons.account_balance, categoryTitle: 'BANQUE', nbrRessource: '25'),
-                            categoryElement(icon: Icons.architecture, categoryTitle: 'ARCHITECTURE', nbrRessource: '17'),
-                            categoryElement(icon: Icons.attach_file, categoryTitle: 'FICHIERS', nbrRessource: '34'),
+                            categoryElement(icon: FontAwesomeIcons.creditCard, categoryTitle: 'BANQUE', nbrRessource: '25'),
+                            categoryElement(icon: FontAwesomeIcons.draftingCompass, categoryTitle: 'ARCHITECTURE', nbrRessource: '17'),
+                            categoryElement(icon: FontAwesomeIcons.paperclip, categoryTitle: 'FICHIERS', nbrRessource: '34'),
                           ],
                           options: CarouselOptions(
                               enlargeCenterPage: true,
