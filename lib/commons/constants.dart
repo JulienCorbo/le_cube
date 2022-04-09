@@ -68,7 +68,7 @@ Widget categoryElementPage({
       borderRadius: BorderRadius.circular(25),
   ),
   child: SizedBox.fromSize(
-    size: Size(56, 56),
+    size: const Size(56, 56),
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           splashColor: blueText, // splash color
@@ -162,7 +162,7 @@ Widget spotlightElement({
                     )
                 ),
                 onPressed: () {},
-                child: Text('VOIR PLUS')
+                child: const Text('VOIR PLUS')
             )
           ],
         ),

@@ -11,14 +11,16 @@ import 'package:le_cube/commons/constants.dart';
 Future<int> createAlbum(BuildContext context,String name, String firstname, String pass, String mail) async {
   final response = await http.post(
     Uri.parse('https://ressource-relationnelle.herokuapp.com/user/new'),
-    headers: <String, String>{
+    headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      'nom': name,
-      'prenom': firstname,
-      'mdp': pass,
-      'email': mail,
+    body: jsonEncode({
+        'user':{
+          'nom': name,
+          'prenom': firstname,
+          'mdp': pass,
+          'email': mail,
+        }
     }),
   );
 
@@ -31,6 +33,9 @@ Future<int> createAlbum(BuildContext context,String name, String firstname, Stri
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
+    int statuscode = response.statusCode;
+    print('Code : ' + statuscode.toString());
+    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
@@ -182,8 +187,8 @@ class _signupState extends State<signup> {
                             context,
                             nameController.value.text,
                             firstnameController.value.text,
-                            emailController.value.text,
-                            passwordController.value.text
+                            passwordController.value.text,
+                          emailController.value.text
                         );
                       });
                     }

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
 import 'package:le_cube/screens/category.dart';
+import 'package:le_cube/screens/profil.dart';
 import '../screens/addRessource.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -30,7 +31,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 200,
                 ),
               ),
-
               const SizedBox(height: 48),
               buildMenuItem(
                   text: 'ACCUEIL',
@@ -39,21 +39,27 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               buildMenuItem(
+                  text: 'PROFIL',
+                  icon: FontAwesomeIcons.user,
+                  onClicked: () => selectedItem(context, 1)
+              ),
+              const SizedBox(height: 16),
+              buildMenuItem(
                   text: 'AJOUTER UNE RESSOURCE',
                   icon: FontAwesomeIcons.plus ,
-                  onClicked: () => selectedItem(context, 1)
+                  onClicked: () => selectedItem(context, 2)
               ),
               const SizedBox(height: 16),
               buildMenuItem(
                   text: 'CATEGORIES',
                   icon: FontAwesomeIcons.arrowRight,
-                  onClicked: () => selectedItem(context, 2)
+                  onClicked: () => selectedItem(context, 3)
               ),
               const SizedBox(height: 16),
               buildMenuItem(
                   text: 'F.A.Q',
                   icon: FontAwesomeIcons.question,
-                  onClicked: () => selectedItem(context, 3)
+                  onClicked: () => selectedItem(context, 4)
               ),
               const SizedBox(height: 32),
               const Divider(thickness: 2, color: Colors.white),
@@ -143,18 +149,24 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const addRessource()
+            builder: (context) => const profil()
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const categoryPage()
+            builder: (context) => const addRessource()
         ));
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const categoryPage()
+        ));
+        break;
+      case 4:
+        Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const homePage()
         ));
+        break;
     }
   }
 }
