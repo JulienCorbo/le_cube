@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:le_cube/screens/FilePickerDemo.dart';
 
 import 'package:share_plus/share_plus.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
+
+import 'package:file_picker/file_picker.dart';
 
 class addRessource extends StatefulWidget {
   const addRessource({Key? key}) : super(key: key);
@@ -15,155 +19,132 @@ class addRessource extends StatefulWidget {
 
 class _addRessourceState extends State<addRessource> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  final String _content =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum diam ipsum, lobortis quis ultricies non, lacinia at justo.';
+  String? dropdownvalue = 'Art';
+  var items = [
+    'literature',
+    'musique',
+    'Culture',
+    'Jeunesse',
+    'Architecture',
+    'Science',
+    'Nature',
+    'Histoire',
+    'Banque',
+    'Art',
+    'Autre'
+  ];
 
-  void _shareContent() {
-    Share.share(_content);
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
         body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                      alignment: Alignment.center,
+            builder: (BuildContext context,
+                BoxConstraints viewportConstraints) {
+              return SingleChildScrollView(
+                  child: Column(
+                      children: [
+                      Container(
+                      height: 100,
                       width: double.infinity,
-                      height: 400,
                       decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/hand_fond.png'),
-                              fit: BoxFit.cover
-                          )
+                        color: blueBackground,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    _globalKey.currentState?.openEndDrawer();
-                                  },
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    color: Colors.white,
-                                  )
-                              )
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.end,
-                          ),
-                          Text(
-                            "Partager\n vos ressources\n facilement !",
-                            textAlign: TextAlign.center,
-                            softWrap: true,
-                            style: GoogleFonts.zenKurenaido(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                              ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'AJOUT RESSOURCE',
+                              style: textStyle.copyWith(fontSize: 40, color: Colors.white),
+                              textAlign: TextAlign.center,
                             ),
-                          ),
-                          SizedBox(height: 30),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 23),
-                                  ),
-                                  primary: Colors.white,
-                                  onPrimary: bleu_txt,
-                                  fixedSize: const Size(250, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                  )
-                              ),
-                              onPressed: _shareContent,
-                              child: const Text('PARTAGER')
-                          ),
-                        ],
+                          ]
+
                       )
                   ),
-                  SizedBox(height: 20),
-                  Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    height: 500,
-                    decoration: const BoxDecoration(
-                      color: bleu_fond,
-                    ),
-                    child: Column(
-                        children: [
-                          SizedBox(height: 10),
-                          Text(
-                            "AJOUT D'UNE RESSOURCE",
+                        Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                            width: 400,
+                            child: Form(
+                              child: Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                alignment: WrapAlignment.start,
+                                runSpacing: 10,
+                                children: <Widget>[
+                                  Text(
+                                  "Titre de la ressource",
+                                  textAlign: TextAlign.center,
+                                  softWrap: true,
+                                  style: textStyle.copyWith(fontSize: 25)
+                                  ),
+                                TextFormField(
+                                  style: textStyle.copyWith(fontSize: 17),
+                                  textAlign: TextAlign.center,
+                                  decoration: textInputDecoration.copyWith(),
+                              ),
+                                ]
+                              )
+                            )
+                        ),
+                        Text(
+                            "Catégorie :",
                             textAlign: TextAlign.center,
                             softWrap: true,
-                            style: GoogleFonts.zenKurenaido(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  textStyle: GoogleFonts.zenKurenaido(
-                                    textStyle: const TextStyle(fontSize: 23),
-                                  ),
-                                  primary: Colors.white,
-                                  onPrimary: bleu_txt,
-                                  fixedSize: const Size(250, 50),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                  )
-                              ),
-                              onPressed: (){},
-                              child: const Text('Ajouter'),
+                            style: textStyle.copyWith(fontSize: 25)
+                        ),
+                        DropdownButtonFormField(
+                          value: dropdownvalue,
+                          decoration: textInputDecoration.copyWith(),
+                          style: textStyle.copyWith(fontSize: 25),
+                          alignment: AlignmentDirectional.centerStart,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: items.map((items) {
+                            return DropdownMenuItem(value: items, child: Text(items));
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownvalue = newValue;
+                            });
+                          },
+                        ),
+                        Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.symmetric(vertical: 300, horizontal: 30),
+                            width: 400,
+                            child: Form(
+                                child: Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                    alignment: WrapAlignment.center,
+                                    runSpacing: 20,
+                                    children: <Widget>[
+                                      Text(
+                                          "Description",
+                                          textAlign: TextAlign.center,
+                                          softWrap: true,
+                                          style: textStyle.copyWith(fontSize: 25)
+                                      ),
+                                      TextFormField(
+                                        minLines: 8,
+                                        maxLines: 8,
+                                        style: GoogleFonts.zenKurenaido(
+                                          textStyle: const TextStyle(
+                                            color: bleu_txt,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        decoration: textInputDecoration.copyWith(),
+                                      ),
+                                    ]
+                                )
+                            )
+                        )
+                  ]
+              )
 
-                          ),
-                        ]
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "BESOIN D'AIDE ?\n VOUS AVEZ UNE QUESTION ?",
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: GoogleFonts.zenKurenaido(
-                      textStyle: const TextStyle(
-                        color: bleu_txt,
-                        fontSize: 28,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          textStyle: GoogleFonts.zenKurenaido(
-                              textStyle: const TextStyle(fontSize: 17)
-                          ),
-                          primary: bleu_btn,
-                          onPrimary: Colors.white,
-                          fixedSize: const Size(250, 50),
-                          side: const BorderSide(color: Colors.white, width: 0.7),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
-                          )
-                      ),
-                      onPressed: () {} ,
-                      child: const Text('SOUMETTRE UNE DEMANDE')
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
-            );
-          },
+              );
+            }
         )
     );
   }

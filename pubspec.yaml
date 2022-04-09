@@ -18,6 +18,7 @@ dependencies:
   carousel_slider: ^4.0.0
   share_plus: ^3.1.0
   video_player: ^2.2.19
+  file_picker: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,10 @@ dev_dependencies:
 
   flutter_lints: ^1.0.0
   flutter_native_splash: ^2.0.5
+flutter_native_splash:
+  image: assets/logo.png
+  color: "#265CB8"
+
 
 flutter:
 
