@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
@@ -24,36 +25,50 @@ class _categoryPageState extends State<categoryPage> {
         builder: (BuildContext context, BoxConstraints viewportConstraints){
           return SingleChildScrollView(
               child: Column(
-              children: [
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: blueBackground,
+                children: [
+                  Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: 200,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/hand_fond.png'),
+                              fit: BoxFit.cover
+                          ),
+                          border: Border(bottom: BorderSide(color: blueBorder, width:4 ))
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    _globalKey.currentState?.openEndDrawer();
+                                  },
+                                  icon: const Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                  )
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.end,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "CATEGORIES",
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            style: GoogleFonts.zenKurenaido(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const homePage()
-                            ));
-                            },
-                          icon: const Icon(
-                              Icons.keyboard_arrow_left,
-                            size: 40.0,
-                            color: Colors.white,
-                          )
-                      ),
-                      Text(
-                        'CATEGORIES',
-                        style: textStyle.copyWith(fontSize: 40, color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ]
-                  )
-                ),
                 const SizedBox(height: 20),
               LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints viewportConstraints) {

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/category.dart';
+import 'package:le_cube/models/user.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
+
+
 
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
@@ -16,9 +20,11 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
 @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+  return Scaffold(
         backgroundColor: whiteBackground,
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),

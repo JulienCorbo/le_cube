@@ -7,6 +7,7 @@ import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/homePage.dart';
 import 'package:le_cube/screens/category.dart';
 import 'package:le_cube/screens/profil.dart';
+import 'package:le_cube/screens/faq.dart';
 import '../screens/addRessource.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -164,7 +165,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 4:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const homePage()
+            builder: (context) => const faq()
         ));
         break;
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/signup.dart';
@@ -22,11 +23,21 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
   );
 
   if (response.statusCode == 200) {
+
+    final Map<String, dynamic> data = json.decode(response.body);
+    final res = Map<String, dynamic>.from(data['res']);
+    SharedPreferences user = await SharedPreferences.getInstance();
+    user.setString('token', res['accesToken']);
+    user.setString('email', res['email']);
+    user.setString('firstname', res['prenom']);
+    user.setString('lastname', res['nom']);
+    user.setInt('roles', res['roles']);
+    user.setInt('id', res['id']);
+
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const homePage()
     ));
-    final data = json.decode(response.body);
-    final resJSon = data['res'];
+
     return 1;
   } else {
     // If the server did not return a 201 CREATED response,
@@ -36,28 +47,18 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
   }
 }
 
-class userInfo {
-  final String token;
-
-  const userInfo({
-    required this.token
-});
-}
 
 class Album {
-  final String token;
   final String mail;
   final String pass;
 
   const Album({
-    required this.token,
     required this.mail,
     required this.pass
   });
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      token: json['token'],
       mail: json['mail'],
       pass: json['pass'],
     );
@@ -72,7 +73,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   Future<int>? _futureAlbum;
 
@@ -97,7 +98,8 @@ class _LoginState extends State<Login> {
                 height: 250,
               ),
               TextFormField(
-                controller: nameController,
+                textInputAction: TextInputAction.next,
+                controller: emailController,
                 style: GoogleFonts.zenKurenaido(
                   textStyle: const TextStyle(
                     color: blueText,
@@ -105,10 +107,11 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 textAlign: TextAlign.center,
-                decoration: textInputDecoration.copyWith(hintText: 'NOM D\'UTILISATEUR'),
+                decoration: textInputDecoration.copyWith(hintText: 'MAIL'),
               ),
               const SizedBox(height: 10),
               TextFormField(
+                textInputAction: TextInputAction.done,
                 controller: passwordController,
                 obscureText: true,
                 style: GoogleFonts.zenKurenaido(
@@ -129,7 +132,7 @@ class _LoginState extends State<Login> {
                         _futureAlbum = logUser(
                             context,
                             passwordController.value.text,
-                            nameController.value.text
+                            emailController.value.text.trim()
                         );
                       });
                     }

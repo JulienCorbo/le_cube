@@ -57,6 +57,7 @@ final textStyle = GoogleFonts.zenKurenaido(
   ),
 );
 
+
 Widget categoryElementPage({
   required String title,
   required IconData? icon,

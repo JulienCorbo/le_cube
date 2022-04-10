@@ -15,9 +15,11 @@ class profil extends StatefulWidget {
 }
 
 class _profilState extends State<profil> {
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
         backgroundColor: whiteBackground,
         body: LayoutBuilder(
@@ -26,32 +28,46 @@ class _profilState extends State<profil> {
                 child: Column(
                   children: [
                     Container(
-                        height: 100,
+                        alignment: Alignment.center,
                         width: double.infinity,
+                        height: 200,
                         decoration: const BoxDecoration(
-                          color: blueBackground,
+                            image: DecorationImage(
+                                image: AssetImage('assets/hand_fond.png'),
+                                fit: BoxFit.cover
+                            ),
+                            border: Border(bottom: BorderSide(color: blueBorder, width:4 ))
                         ),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => const homePage()
-                                    ));
-                                  },
-                                  icon: const Icon(
-                                    Icons.keyboard_arrow_left,
-                                    size: 40.0,
-                                    color: Colors.white,
-                                  )
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      _globalKey.currentState?.openEndDrawer();
+                                    },
+                                    icon: const Icon(
+                                      Icons.menu,
+                                      color: Colors.white,
+                                    )
+                                )
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.end,
+                            ),
+                            SizedBox(height: 20),
+                            Text(
+                              "PROFIL",
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              style: GoogleFonts.zenKurenaido(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                ),
                               ),
-                              Text(
-                                'PROFIL',
-                                style: textStyle.copyWith(fontSize: 40, color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ]
+                            ),
+                          ],
                         )
                     ),
                     const SizedBox(height: 20),
