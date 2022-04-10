@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:le_cube/screens/category.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
@@ -152,6 +153,23 @@ class _addRessourceState extends State<addRessource> {
                                           });
                                         },
                                       ),*/
+                                      TextFormField(
+                                        style: textStyle.copyWith(fontSize: 17),
+                                        textAlign: TextAlign.center,
+                                        decoration: textInputDecoration.copyWith(hintText: 'FAIRE DROPDOWNMENU AVEC JSON'),
+
+                                      ),
+                                      Text(
+                                          "Fichier",
+                                          textAlign: TextAlign.center,
+                                          style: textStyle.copyWith(fontSize: 25)
+                                      ),
+                                      SizedBox(width: 20),
+                                      ElevatedButton(
+                                        style: buttonWhite,
+                                          onPressed: (){},
+                                          child: Text('+')
+                                      ),
                                       CheckboxListTile(
                                           controlAffinity: ListTileControlAffinity.leading,
                                           value: friendChecked,

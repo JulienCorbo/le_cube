@@ -15,6 +15,11 @@ class profil extends StatefulWidget {
 }
 
 class _profilState extends State<profil> {
+  //TODO -> Récupérer les infos depuis le json de connexion
+  String mail = 'mail-user';
+  String firstname = 'prenom-user';
+  String lastname = 'nom-user';
+  String role = 'role-user';
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -77,54 +82,36 @@ class _profilState extends State<profil> {
                             child: Column(
                               children: [
                                 Text(
-                                    'NOM DU PROFIL',
+                                  (firstname + ' ' + lastname).toUpperCase(),
                                   style: textStyle.copyWith(fontSize: 25),
                                 ),
                                 const SizedBox(height: 20),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-
                                   children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                            "34",
-                                          style: textStyle.copyWith(fontSize: 30, fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                            "RESSOURCES\nPARTAGÉES",
-                                          style: textStyle.copyWith(fontSize: 20),
-                                          textAlign: TextAlign.center,
-                                        )
-                                      ],
+                                    Text(
+                                      'Mail : ',
+                                      style: textStyle.copyWith(fontSize: 23),
                                     ),
-                                    SizedBox(width: 40),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "12",
-                                          style: textStyle.copyWith(fontSize: 30, fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          "RESSOURCES\nEN FAVORIS",
-                                          style: textStyle.copyWith(fontSize: 20),
-                                          textAlign: TextAlign.center,
-                                        )
-                                      ],
+                                    Text(
+                                      mail,
+                                      style: textStyle.copyWith(fontSize: 23),
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 16),
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: double.infinity,
-                                  child: Column(
-                                    children: [
-                                      const Divider(thickness: 2, color: blueBackground),
-                                      Text("Liste des ressources partagées ?", style: textStyle),
-                                      const Divider(thickness: 2, color: blueBackground),
-                                    ],
-                                  ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Rôle : ',
+                                      style: textStyle.copyWith(fontSize: 23),
+                                    ),
+                                    Text(
+                                      role,
+                                      style: textStyle.copyWith(fontSize: 23),
+                                    )
+                                  ],
                                 ),
                                 SizedBox(height: 40),
                                 ElevatedButton(
