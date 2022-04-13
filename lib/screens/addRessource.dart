@@ -28,6 +28,7 @@ class _addRessourceState extends State<addRessource> {
       setState(() {
         Iterable list = json.decode(response.body);
         categoryList = list.map((model) => ressourceCategory.fromJson(model)).toList();
+        print(categoryList);
       });
     });
   }

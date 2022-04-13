@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/signup.dart';
 import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/models/user.dart';
 
 Future<int> logUser(BuildContext context, String pass, String mail) async {
   final response = await http.post(
@@ -26,13 +27,8 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
 
     final Map<String, dynamic> data = json.decode(response.body);
     final res = Map<String, dynamic>.from(data['res']);
-    SharedPreferences user = await SharedPreferences.getInstance();
-    user.setString('token', res['accesToken']);
-    user.setString('email', res['email']);
-    user.setString('firstname', res['prenom']);
-    user.setString('lastname', res['nom']);
-    user.setInt('roles', res['roles']);
-    user.setInt('id', res['id']);
+    final user = User.fromJson(res);
+    print(user.token);
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const homePage()
