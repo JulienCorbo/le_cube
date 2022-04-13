@@ -188,7 +188,7 @@ class _signupState extends State<signup> {
                             nameController.value.text,
                             firstnameController.value.text,
                             passwordController.value.text,
-                          emailController.value.text
+                            emailController.value.text
                         );
                       });
                     }

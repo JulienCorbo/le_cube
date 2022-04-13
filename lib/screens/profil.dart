@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
-import 'package:le_cube/screens/homePage.dart';
 import 'package:le_cube/screens/login.dart';
+import 'package:le_cube/utils/userInfo.dart';
+
+
 
 class profil extends StatefulWidget {
   const profil({Key? key}) : super(key: key);
@@ -15,18 +16,28 @@ class profil extends StatefulWidget {
 }
 
 class _profilState extends State<profil> {
-  //TODO -> Récupérer les infos depuis le json de connexion
-  String mail = 'mail-user';
-  String firstname = 'prenom-user';
-  String lastname = 'nom-user';
-  String role = 'role-user';
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  String token = '';
+  String email = '';
+  String firstname = '';
+  String lastname = '';
+  String role = '';
+  @override
+  void initState() {
+    super.initState();
+    token = UserInfo.getUserToken();
+    email = UserInfo.getUserEmail();
+    firstname = UserInfo.getUserFirstname();
+    lastname = UserInfo.getUserLastname();
+    role = UserInfo.getUserRole();
+
+  }
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
-        backgroundColor: whiteBackground,
+        backgroundColor: blueBackground,
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints viewportConstraints){
               return SingleChildScrollView(
@@ -60,7 +71,7 @@ class _profilState extends State<profil> {
                               ],
                               mainAxisAlignment: MainAxisAlignment.end,
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               "PROFIL",
                               textAlign: TextAlign.center,
@@ -83,7 +94,7 @@ class _profilState extends State<profil> {
                               children: [
                                 Text(
                                   (firstname + ' ' + lastname).toUpperCase(),
-                                  style: textStyle.copyWith(fontSize: 25),
+                                  style: textStyle.copyWith(fontSize: 25, color: Colors.white),
                                 ),
                                 const SizedBox(height: 20),
                                 Row(
@@ -91,11 +102,11 @@ class _profilState extends State<profil> {
                                   children: [
                                     Text(
                                       'Mail : ',
-                                      style: textStyle.copyWith(fontSize: 23),
+                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
                                     ),
                                     Text(
-                                      mail,
-                                      style: textStyle.copyWith(fontSize: 23),
+                                      email,
+                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
                                     )
                                   ],
                                 ),
@@ -105,15 +116,15 @@ class _profilState extends State<profil> {
                                   children: [
                                     Text(
                                       'Rôle : ',
-                                      style: textStyle.copyWith(fontSize: 23),
+                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
                                     ),
                                     Text(
                                       role,
-                                      style: textStyle.copyWith(fontSize: 23),
+                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 40),
+                                const SizedBox(height: 40),
                                 ElevatedButton(
                                     style: buttonWhite,
                                     onPressed: () => Navigator.of(context).push(MaterialPageRoute(
@@ -121,7 +132,7 @@ class _profilState extends State<profil> {
                                     )),
                                     child: const Text('SE DÉCONNECTER')
                                 ),
-                                SizedBox(height: 30),
+                                const SizedBox(height: 30),
                               ],
                             )
                           );

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/login.dart';
+import 'package:le_cube/utils/userInfo.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  await UserInfo.init();
   runApp(const MyApp());
 }
 
@@ -12,16 +18,13 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
     return MaterialApp(
       title: 'RR',
       theme: ThemeData(
         //canvasColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
-      home: const homePage(),
+      home: const Login(),
     );
   }
 }

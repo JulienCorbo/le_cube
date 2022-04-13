@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:le_cube/screens/category.dart';
@@ -10,8 +8,35 @@ import 'dart:convert';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
-import 'package:le_cube/data/category_api.dart';
 import 'package:le_cube/models/category.dart';
+
+Future<int> fetchCategory(BuildContext context, String pass, String mail) async {
+  final response = await http.post(
+    Uri.parse('https://ressource-relationnelle.herokuapp.com/ressources/categories'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode({
+      'user': {
+        'email': mail,
+        'mdp': pass,
+      }
+    }),
+  );
+
+  if (response.statusCode == 200) {
+
+    final Map<String, dynamic> data = json.decode(response.body);
+    final user = ressourceCategory.fromJson(data['res']);
+    return 1;
+  }else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    print(response.body);
+    throw Exception('Failed to create album.');
+  }
+}
+
 
 class addRessource extends StatefulWidget {
   const addRessource({Key? key}) : super(key: key);
@@ -23,15 +48,6 @@ class addRessource extends StatefulWidget {
 class _addRessourceState extends State<addRessource> {
   List<ressourceCategory> categoryList = List<ressourceCategory>.empty();
 
-  void getCategoryFromApi() async {
-    CategoryApi.getCategory().then((response) {
-      setState(() {
-        Iterable list = json.decode(response.body);
-        categoryList = list.map((model) => ressourceCategory.fromJson(model)).toList();
-        print(categoryList);
-      });
-    });
-  }
 
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   String? dropdownvalue = 'Selectionner une catégorie';
@@ -51,12 +67,6 @@ class _addRessourceState extends State<addRessource> {
     'Art',
     'Autre'
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    getCategoryFromApi();
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(

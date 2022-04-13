@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
-
 class ressourceCategory {
-  String name;
-  int id;
-  IconData icon;
+  final String name;
+  final String id;
+  final String icon;
 
-  ressourceCategory.fromJson(Map json)
-      : id = json['id_categories_ressources'],
-       name = json['cat_ressources_libelle'],
-       icon = json['icone'];
-  Map toJson() {
-    return {'id' : id, 'name' : name, 'icon' : icon};
+  ressourceCategory({required this.name, required this.id, required this.icon});
+
+
+  factory ressourceCategory.fromJson(Map<String, dynamic> data){
+    final name = data['accesToken'] as String;
+    final id = data['email'] as String;
+    final icon = data['prenom'] as String;
+    return ressourceCategory(name: name, id: id, icon: icon);
   }
 }

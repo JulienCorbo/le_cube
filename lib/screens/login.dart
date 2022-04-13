@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/signup.dart';
 import 'package:le_cube/screens/homePage.dart';
 import 'package:le_cube/models/user.dart';
+import 'package:le_cube/utils/userInfo.dart';
 
 Future<int> logUser(BuildContext context, String pass, String mail) async {
   final response = await http.post(
@@ -26,10 +26,13 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
   if (response.statusCode == 200) {
 
     final Map<String, dynamic> data = json.decode(response.body);
-    final res = Map<String, dynamic>.from(data['res']);
-    print(data['res']);
-    final user = User.fromJson(res);
-    print(user.token);
+    final user = User.fromJson(data['res']);
+    UserInfo.setUserToken(user.token);
+    UserInfo.setUserEmail(user.email);
+    UserInfo.setUserFirstname(user.firstname);
+    UserInfo.setUserLastname(user.lastname);
+    UserInfo.setUserRole(user.roles);
+    UserInfo.setUserId(user.id);
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const homePage()
