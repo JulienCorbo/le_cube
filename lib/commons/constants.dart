@@ -8,10 +8,23 @@ final buttonWhite = ElevatedButton.styleFrom(
   ),
   primary: Colors.white,
   onPrimary: blueText,
-  fixedSize: const Size(250, 50),
+  fixedSize: Size(250, 50),
   shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20)
   )
+);
+
+
+final buttonAdd = ElevatedButton.styleFrom(
+    textStyle: GoogleFonts.zenKurenaido(
+      textStyle: const TextStyle(fontSize: 18),
+    ),
+    primary: Colors.white,
+    onPrimary: blueText,
+    fixedSize: Size(150, 50),
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20)
+    )
 );
 
 final buttonBlue = ElevatedButton.styleFrom(

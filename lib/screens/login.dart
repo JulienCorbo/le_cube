@@ -27,6 +27,7 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
 
     final Map<String, dynamic> data = json.decode(response.body);
     final user = User.fromJson(data['res']);
+    print(response.body);
     UserInfo.setUserToken(user.token);
     UserInfo.setUserEmail(user.email);
     UserInfo.setUserFirstname(user.firstname);

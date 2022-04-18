@@ -1,37 +1,77 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:le_cube/screens/category.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:le_cube/commons/constants.dart';
+import 'package:le_cube/utils/fileInfo.dart';
+import 'package:le_cube/utils/userInfo.dart';
 import 'package:le_cube/widgets/navigationDrawer.dart';
 import 'package:le_cube/models/category.dart';
+import 'package:le_cube/models/file.dart';
+import 'package:le_cube/screens/homePage.dart';
 
-Future<int> fetchCategory(BuildContext context, String pass, String mail) async {
+Future<List> sendFile(BuildContext context, String filePath, String fileName) async {
+  List responseList = [];
+  String responseKey = '';
+  var uri = Uri.parse('https://ressource-relationnelle.herokuapp.com/upload');
+  var request = http.MultipartRequest('POST', uri)
+    ..files.add(await http.MultipartFile.fromPath('file', filePath, filename: fileName));
+    request.send().then((result) async {
+      http.Response.fromStream(result)
+          .then((response) {
+        if (response.statusCode == 200) {
+          print('response.body ' + response.body);
+          Map<String, dynamic> map = json.decode(response.body);
+          List<dynamic> data = map['files'];
+          responseList.add('"'+data[0]['key'].toString()+'"');
+          print(responseList);
+          return responseList;
+        }
+      });
+    }).catchError((err) => print('error : '+err.toString()))
+        .whenComplete(()
+    {});
+    return [];
+  /*var response = await request.send();
+  if (response.statusCode == 200) print( http.Response.fromStream(response));
+  return 1;*/
+}
+
+Future<int> sendRessources(BuildContext context, String title, int idCategory, String description, String userId, List relation, List fileKey) async {
+  /*var uri = Uri.parse('https://ressource-relationnelle.herokuapp.com/ressource/new');
+  var request = http.MultipartRequest('POST', uri)
+  ..contentLength =
+    ..files.add(await http.MultipartFile.fromPath('file', ressources.toString(), filename: 'eee'))
+
+  var response = await request.send();*/
   final response = await http.post(
-    Uri.parse('https://ressource-relationnelle.herokuapp.com/ressources/categories'),
+    Uri.parse('https://ressource-relationnelle.herokuapp.com/ressource/new'),
+
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode({
-      'user': {
-        'email': mail,
-        'mdp': pass,
-      }
+      'titre' : title,
+      'categorie' : idCategory+1,
+      'description' : description,
+      'user_id' : userId,
+      'relation' : relation,
+      'pj' : fileKey,
     }),
   );
 
   if (response.statusCode == 200) {
-
-    final Map<String, dynamic> data = json.decode(response.body);
-    final user = ressourceCategory.fromJson(data['res']);
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const homePage()
+    ));
+    print(response.body);
     return 1;
-  }else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
+  } else {
     print(response.body);
     throw Exception('Failed to create album.');
   }
@@ -46,29 +86,65 @@ class addRessource extends StatefulWidget {
 }
 
 class _addRessourceState extends State<addRessource> {
+  bool fileIsPicked = false;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   List<ressourceCategory> categoryList = List<ressourceCategory>.empty();
-
-
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  String? dropdownvalue = 'Selectionner une catégorie';
+  String? dropDownValue = 'Art';
+  int categoryChoose = 0;
   bool friendChecked = false;
   bool parentChecked = false;
   bool coworkerChecked = false;
-  var items = [
-    'literature',
-    'musique',
-    'Culture',
-    'Jeunesse',
-    'Architecture',
-    'Science',
-    'Nature',
-    'Histoire',
-    'Banque',
-    'Art',
-    'Autre'
+  double? fileZoneHeight = 30;
+  String fileChoose = 'Veuillez-choisir un fichier';
+  String fileChooseName = '';
+  List fileKey = [];
+  String pathFile = '';
+  Future<int>? _futureAlbum;
+
+  List _selecteRelation = [];
+  Map<String, dynamic> _relation = {
+    "responseBody": [
+      {"relation_id": "0", "relation_name": "Amis"},
+      {"relation_id": "1", "relation_name": "Parent"},
+    ],
+    "Total" : 2
+  };
+
+  void _onRelationSelected(bool? selected, relation_name) {
+    if (selected == true) {
+      setState(() {
+        _selecteRelation.add(relation_name);
+      });
+    } else {
+      setState(() {
+        _selecteRelation.remove(relation_name);
+      });
+    }
+  }
+
+  int _findCategoryId(List<String> items, String category){
+    categoryChoose = items.indexWhere((element) => element == category);
+    return categoryChoose;
+  }
+
+  List<String> items = [
+    "Art",
+    "Banque",
+    "Histoire",
+    "Nature",
+    "Science",
+    "Architecture",
+    "Jeunesse ",
+    "Culture ",
+    "Musique ",
+    "Littérature ",
+    "Autre",
   ];
 
   Widget build(BuildContext context) {
+    GlobalKey<FormState> _form = GlobalKey<FormState>();
     return Scaffold(
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
@@ -87,7 +163,8 @@ class _addRessourceState extends State<addRessource> {
                                     image: AssetImage('assets/hand_fond.png'),
                                     fit: BoxFit.cover
                                 ),
-                                border: Border(bottom: BorderSide(color: blueBorder, width:4 ))
+                                border: Border(bottom: BorderSide(
+                                    color: blueBorder, width: 4))
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +173,8 @@ class _addRessourceState extends State<addRessource> {
                                   children: [
                                     IconButton(
                                         onPressed: () {
-                                          _globalKey.currentState?.openEndDrawer();
+                                          _globalKey.currentState
+                                              ?.openEndDrawer();
                                         },
                                         icon: const Icon(
                                           Icons.menu,
@@ -123,11 +201,14 @@ class _addRessourceState extends State<addRessource> {
                         ),
                         Container(
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 30, horizontal: 30),
                             width: 400,
                             child: Form(
+                              key: _form,
                                 child: Wrap(
-                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                    crossAxisAlignment: WrapCrossAlignment
+                                        .center,
                                     alignment: WrapAlignment.center,
                                     runSpacing: 10,
                                     children: <Widget>[
@@ -135,9 +216,11 @@ class _addRessourceState extends State<addRessource> {
                                           "Titre de la ressource",
                                           textAlign: TextAlign.center,
                                           softWrap: true,
-                                          style: textStyle.copyWith(fontSize: 25)
+                                          style: textStyle.copyWith(
+                                              fontSize: 25)
                                       ),
                                       TextFormField(
+                                        controller: titleController,
                                         style: textStyle.copyWith(fontSize: 17),
                                         textAlign: TextAlign.center,
                                         decoration: textInputDecoration,
@@ -147,86 +230,87 @@ class _addRessourceState extends State<addRessource> {
                                           textAlign: TextAlign.left,
                                           style: textStyle.copyWith(fontSize: 25)
                                       ),
-                                      /*DropdownButton(
-                                        isDense: true,
-                                        value: dropdownvalue,
-                                        style: textStyle.copyWith(fontSize: 22),
+                                      DropdownButtonFormField(
+                                        value: dropDownValue,
+                                        decoration: textInputDecoration.copyWith(),
+                                        style: textStyle.copyWith(fontSize: 20),
                                         alignment: AlignmentDirectional.centerStart,
                                         icon: const Icon(Icons.keyboard_arrow_down),
-                                        items: categoryList.map((item) {
-                                          return DropdownMenuItem(
-                                              value: item['name'],
-                                              child: Text(item['name']);
+                                        items: items.map((items) {
+                                          return DropdownMenuItem(value: items, child: Text(items));
                                         }).toList(),
-                                        onChanged: (newValue) {
+                                        onChanged: (String? newValue) {
                                           setState(() {
-                                            dropdownvalue = newValue;
+                                            dropDownValue = newValue;
                                           });
                                         },
-                                      ),*/
-                                      TextFormField(
-                                        style: textStyle.copyWith(fontSize: 17),
-                                        textAlign: TextAlign.center,
-                                        decoration: textInputDecoration.copyWith(hintText: 'FAIRE DROPDOWNMENU AVEC JSON'),
-
                                       ),
                                       Text(
                                           "Fichier",
                                           textAlign: TextAlign.center,
                                           style: textStyle.copyWith(fontSize: 25)
                                       ),
-                                      SizedBox(width: 20),
+                                      SizedBox(width: double.infinity),
                                       ElevatedButton(
-                                        style: buttonWhite,
-                                          onPressed: (){},
+                                          style: buttonAdd,
+                                          onPressed: () async {
+                                            FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+                                            if (result != null) {
+                                              final file = result.files.single.path as String;
+                                              final fileName = result.files.single.name;
+                                              setState(() {
+                                                fileChoose = file;
+                                                fileChooseName = fileName;
+                                                fileIsPicked = true;
+                                              });
+                                            }
+                                          },
                                           child: Text('+')
                                       ),
-                                      CheckboxListTile(
-                                          controlAffinity: ListTileControlAffinity.leading,
-                                          value: friendChecked,
-                                          title: Text(
-                                              'Amis',
-                                            style: textStyle.copyWith(fontSize: 25),
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              friendChecked = value!;
-                                            });
-                                          }
+                                     Text(
+                                       fileChoose,
+                                       style: textStyle,
+                                     ),
+                                      const SizedBox(width: double.infinity),
+                                      Text(
+                                          "Relation",
+                                          textAlign: TextAlign.center,
+                                          softWrap: true,
+                                          style: textStyle.copyWith(
+                                              fontSize: 25)
                                       ),
-                                      CheckboxListTile(
-                                          controlAffinity: ListTileControlAffinity.leading,
-                                          value: parentChecked,
-                                          title: Text(
-                                            'Parent',
-                                            style: textStyle.copyWith(fontSize: 25),
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              parentChecked = value!;
-                                            });
-                                          }
-                                      ),
-                                      CheckboxListTile(
-                                          controlAffinity: ListTileControlAffinity.leading,
-                                          value: coworkerChecked,
-                                          title: Text(
-                                            'Collègue',
-                                            style: textStyle.copyWith(fontSize: 25),
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              coworkerChecked = value!;
-                                            });
-                                          }
+                                      SizedBox(
+                                        child: ListView.builder(
+                                            padding: EdgeInsets.all(0.0),
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: _relation['Total'],
+                                            itemBuilder: (BuildContext context, int index) {
+                                              return CheckboxListTile(
+                                                controlAffinity: ListTileControlAffinity.leading,
+                                                value: _selecteRelation
+                                                    .contains(_relation['responseBody'][index]['relation_name']),
+                                                onChanged: (bool? selected) {
+                                                  _onRelationSelected(selected,
+                                                      _relation['responseBody'][index]['relation_name']);
+                                                  },
+                                                title: Text(
+                                                    _relation['responseBody'][index]['relation_name'],
+                                                  style: textStyle.copyWith(fontSize: 23),
+                                                ),
+                                              );
+                                            }),
                                       ),
                                       Text(
                                           "Description",
                                           textAlign: TextAlign.center,
                                           softWrap: true,
-                                          style: textStyle.copyWith(fontSize: 25)
+                                          style: textStyle.copyWith(
+                                              fontSize: 25)
                                       ),
                                       TextFormField(
+                                        controller: descriptionController,
                                         minLines: 8,
                                         maxLines: 8,
                                         style: GoogleFonts.zenKurenaido(
@@ -236,11 +320,30 @@ class _addRessourceState extends State<addRessource> {
                                           ),
                                         ),
                                         textAlign: TextAlign.center,
-                                        decoration: textInputDecoration.copyWith(),
+                                        decoration: textInputDecoration,
                                       ),
                                       ElevatedButton(
                                           style: buttonBlue,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            if (_form.currentState!.validate()) {
+                                              setState(() async {
+                                                final List fileKey = await sendFile(
+                                                    context,
+                                                    fileChoose,
+                                                    fileChooseName
+                                                );
+                                                _futureAlbum = sendRessources(
+                                                    context,
+                                                    titleController.value.text,
+                                                    _findCategoryId(items, dropDownValue!),
+                                                    descriptionController.value.text,
+                                                    UserInfo.getUserId(),
+                                                    _selecteRelation,
+                                                    fileKey
+                                                );
+                                              });
+                                            }
+                                          },
                                           child: const Text('ENVOYER')
                                       ),
                                     ]

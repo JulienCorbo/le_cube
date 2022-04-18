@@ -29,7 +29,6 @@ class _profilState extends State<profil> {
     firstname = UserInfo.getUserFirstname();
     lastname = UserInfo.getUserLastname();
     role = UserInfo.getUserRole();
-
   }
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
@@ -37,7 +36,7 @@ class _profilState extends State<profil> {
     return Scaffold(
         key: _globalKey,
         endDrawer: NavigationDrawerWidget(),
-        backgroundColor: blueBackground,
+        backgroundColor: whiteBackground,
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints viewportConstraints){
               return SingleChildScrollView(
@@ -94,7 +93,7 @@ class _profilState extends State<profil> {
                               children: [
                                 Text(
                                   (firstname + ' ' + lastname).toUpperCase(),
-                                  style: textStyle.copyWith(fontSize: 25, color: Colors.white),
+                                  style: textStyle.copyWith(fontSize: 25),
                                 ),
                                 const SizedBox(height: 20),
                                 Row(
@@ -102,11 +101,11 @@ class _profilState extends State<profil> {
                                   children: [
                                     Text(
                                       'Mail : ',
-                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
+                                      style: textStyle.copyWith(fontSize: 23),
                                     ),
                                     Text(
                                       email,
-                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
+                                      style: textStyle.copyWith(fontSize: 23),
                                     )
                                   ],
                                 ),
@@ -116,20 +115,28 @@ class _profilState extends State<profil> {
                                   children: [
                                     Text(
                                       'Rôle : ',
-                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
+                                      style: textStyle.copyWith(fontSize: 23),
                                     ),
                                     Text(
                                       role,
-                                      style: textStyle.copyWith(fontSize: 23, color: Colors.white),
+                                      style: textStyle.copyWith(fontSize: 23),
                                     )
                                   ],
                                 ),
                                 const SizedBox(height: 40),
                                 ElevatedButton(
-                                    style: buttonWhite,
-                                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                                    style: buttonBlue,
+                                    onPressed: () {
+                                      UserInfo.deleteUserToken();
+                                      UserInfo.deleteUserEmail();
+                                      UserInfo.deleteUserFirstname();
+                                      UserInfo.deleteUserLastname();
+                                      UserInfo.deleteUserRole();
+                                      UserInfo.deleteUserId();
+                                      Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => const Login()
-                                    )),
+                                      ));
+                                    },
                                     child: const Text('SE DÉCONNECTER')
                                 ),
                                 const SizedBox(height: 30),
