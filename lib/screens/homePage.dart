@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:le_cube/screens/addRessource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:le_cube/commons/constants.dart';
@@ -75,7 +76,11 @@ class _homePageState extends State<homePage> {
                           const SizedBox(height: 30),
                           ElevatedButton(
                               style: buttonWhite,
-                              onPressed: () {} ,
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const addRessource()
+                                ));
+                              } ,
                               child: const Text('PARTAGER')
                           ),
                         ],
