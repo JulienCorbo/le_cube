@@ -9,6 +9,6 @@ class getFileInfo {
       _preferences = await SharedPreferences.getInstance();
 
   //get & set Key
-  static Future setFileKey(String Filekey) async => await _preferences.setString(_keyFileInfo, Filekey);
+  static Future setFileKey(String fileKey) async => await _preferences.setString(_keyFileInfo, fileKey);
   static String getFileKey() => _preferences.getString(_keyFileInfo).toString();
 }

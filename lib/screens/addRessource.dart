@@ -15,40 +15,26 @@ import 'package:le_cube/models/category.dart';
 import 'package:le_cube/models/file.dart';
 import 'package:le_cube/screens/homePage.dart';
 
-Future<List> sendFile(BuildContext context, String filePath, String fileName) async {
-  List responseList = [];
-  String responseKey = '';
+Future<String> sendFile(BuildContext context, String filePath, String fileName) async {
+  String key = '';
   var uri = Uri.parse('https://ressource-relationnelle.herokuapp.com/upload');
   var request = http.MultipartRequest('POST', uri)
     ..files.add(await http.MultipartFile.fromPath('file', filePath, filename: fileName));
-    request.send().then((result) async {
-      http.Response.fromStream(result)
-          .then((response) {
-        if (response.statusCode == 200) {
-          print('response.body ' + response.body);
-          Map<String, dynamic> map = json.decode(response.body);
-          List<dynamic> data = map['files'];
-          responseList.add('"'+data[0]['key'].toString()+'"');
-          print(responseList);
-          return responseList;
-        }
-      });
-    }).catchError((err) => print('error : '+err.toString()))
-        .whenComplete(()
-    {});
-    return [];
-  /*var response = await request.send();
-  if (response.statusCode == 200) print( http.Response.fromStream(response));
-  return 1;*/
+  request.send().then((result) async {
+    http.Response.fromStream(result).then((response) {
+      if (response.statusCode == 200) {
+        Map<String, dynamic> map = json.decode(response.body);
+        keyFile = map['key'];
+        return keyFile;
+      }
+    });
+  }).catchError((err) => print('error : '+err.toString()))
+      .whenComplete(()
+  {});
+  return '';
 }
 
-Future<int> sendRessources(BuildContext context, String title, int idCategory, String description, String userId, List relation, List fileKey) async {
-  /*var uri = Uri.parse('https://ressource-relationnelle.herokuapp.com/ressource/new');
-  var request = http.MultipartRequest('POST', uri)
-  ..contentLength =
-    ..files.add(await http.MultipartFile.fromPath('file', ressources.toString(), filename: 'eee'))
-
-  var response = await request.send();*/
+Future<int> sendRessources(BuildContext context, String title, int idCategory, String description, String userId, List relation, String fileKey) async {
   final response = await http.post(
     Uri.parse('https://ressource-relationnelle.herokuapp.com/ressource/new'),
 
@@ -95,11 +81,10 @@ class _addRessourceState extends State<addRessource> {
   int categoryChoose = 0;
   bool friendChecked = false;
   bool parentChecked = false;
-  bool coworkerChecked = false;
   double? fileZoneHeight = 30;
   String fileChoose = 'Veuillez-choisir un fichier';
   String fileChooseName = '';
-  List fileKey = [];
+  String fileKey = '';
   String pathFile = '';
   Future<int>? _futureAlbum;
 
@@ -205,7 +190,7 @@ class _addRessourceState extends State<addRessource> {
                                 vertical: 30, horizontal: 30),
                             width: 400,
                             child: Form(
-                              key: _form,
+                                key: _form,
                                 child: Wrap(
                                     crossAxisAlignment: WrapCrossAlignment
                                         .center,
@@ -216,8 +201,7 @@ class _addRessourceState extends State<addRessource> {
                                           "Titre de la ressource",
                                           textAlign: TextAlign.center,
                                           softWrap: true,
-                                          style: textStyle.copyWith(
-                                              fontSize: 25)
+                                          style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold)
                                       ),
                                       TextFormField(
                                         controller: titleController,
@@ -228,7 +212,7 @@ class _addRessourceState extends State<addRessource> {
                                       Text(
                                           "Catégorie",
                                           textAlign: TextAlign.left,
-                                          style: textStyle.copyWith(fontSize: 25)
+                                          style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold)
                                       ),
                                       DropdownButtonFormField(
                                         value: dropDownValue,
@@ -248,9 +232,9 @@ class _addRessourceState extends State<addRessource> {
                                       Text(
                                           "Fichier",
                                           textAlign: TextAlign.center,
-                                          style: textStyle.copyWith(fontSize: 25)
+                                          style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold)
                                       ),
-                                      SizedBox(width: double.infinity),
+                                      const SizedBox(width: double.infinity),
                                       ElevatedButton(
                                           style: buttonAdd,
                                           onPressed: () async {
@@ -268,17 +252,17 @@ class _addRessourceState extends State<addRessource> {
                                           },
                                           child: Text('+')
                                       ),
-                                     Text(
-                                       fileChoose,
-                                       style: textStyle,
-                                     ),
+                                      const SizedBox(width: double.infinity),
+                                      Text(
+                                        fileChoose,
+                                        style: textStyle,
+                                      ),
                                       const SizedBox(width: double.infinity),
                                       Text(
                                           "Relation",
                                           textAlign: TextAlign.center,
                                           softWrap: true,
-                                          style: textStyle.copyWith(
-                                              fontSize: 25)
+                                          style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold)
                                       ),
                                       SizedBox(
                                         child: ListView.builder(
@@ -294,9 +278,9 @@ class _addRessourceState extends State<addRessource> {
                                                 onChanged: (bool? selected) {
                                                   _onRelationSelected(selected,
                                                       _relation['responseBody'][index]['relation_name']);
-                                                  },
+                                                },
                                                 title: Text(
-                                                    _relation['responseBody'][index]['relation_name'],
+                                                  _relation['responseBody'][index]['relation_name'],
                                                   style: textStyle.copyWith(fontSize: 23),
                                                 ),
                                               );
@@ -306,8 +290,7 @@ class _addRessourceState extends State<addRessource> {
                                           "Description",
                                           textAlign: TextAlign.center,
                                           softWrap: true,
-                                          style: textStyle.copyWith(
-                                              fontSize: 25)
+                                          style: textStyle.copyWith(fontSize: 25, fontWeight: FontWeight.bold)
                                       ),
                                       TextFormField(
                                         controller: descriptionController,
@@ -327,11 +310,12 @@ class _addRessourceState extends State<addRessource> {
                                           onPressed: () {
                                             if (_form.currentState!.validate()) {
                                               setState(() async {
-                                                final List fileKey = await sendFile(
+                                                fileKey = await sendFile(
                                                     context,
                                                     fileChoose,
                                                     fileChooseName
                                                 );
+                                                print('KEEEY : ' + keyFile);
                                                 _futureAlbum = sendRessources(
                                                     context,
                                                     titleController.value.text,
@@ -339,8 +323,10 @@ class _addRessourceState extends State<addRessource> {
                                                     descriptionController.value.text,
                                                     UserInfo.getUserId(),
                                                     _selecteRelation,
-                                                    fileKey
+                                                    keyFile
                                                 );
+                                                print('finito');
+                                                keyFile = '';
                                               });
                                             }
                                           },
@@ -352,7 +338,6 @@ class _addRessourceState extends State<addRessource> {
                         ),
                       ]
                   )
-
               );
             }
         )
