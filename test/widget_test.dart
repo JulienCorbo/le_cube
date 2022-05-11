@@ -20,8 +20,5 @@ void main() {
       logUser(context, "test", "augustin@gmail.com");
       return 1;
     }
-
-
-
   });
 }
