@@ -9,7 +9,7 @@ import 'package:le_cube/screens/homePage.dart';
 import 'package:le_cube/models/user.dart';
 import 'package:le_cube/utils/userInfo.dart';
 
-Future<String> logUser(BuildContext context, String pass, String mail) async {
+Future<int> logUser(BuildContext context, String pass, String mail) async {
   final response = await http.post(
     Uri.parse('https://ressource-relationnelle.herokuapp.com/login'),
     headers: <String, String>{
@@ -39,7 +39,7 @@ Future<String> logUser(BuildContext context, String pass, String mail) async {
         builder: (context) => const homePage()
     ));
 
-    return response.body;
+    return 1;
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
                             context,
                             passwordController.value.text,
                             emailController.value.text.trim()
-                        ) as Future<int>?;
+                        );
                       });
                     }
                   },
