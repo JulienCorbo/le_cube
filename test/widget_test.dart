@@ -17,9 +17,9 @@ import 'package:le_cube/utils/userInfo.dart';
 void main() {
   testWidgets('Connexion utilisateur', (WidgetTester tester) async {
     int build(BuildContext context) {
-      if (logUser(context, "test", "augustin@gmail.com") == 1) {
+      logUser(context, "test", "augustin@gmail.com").then((result) async {
         print('La connexion est bonne man ;)');
-      }
+      });
       return 1;
     }
   });
