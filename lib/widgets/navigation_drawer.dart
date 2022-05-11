@@ -4,14 +4,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/home_page.dart';
 import 'package:le_cube/screens/category.dart';
 import 'package:le_cube/screens/profil.dart';
 import 'package:le_cube/screens/faq.dart';
-import '../screens/addRessource.dart';
+import '../screens/add_ressource.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
+
+  const NavigationDrawerWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -25,7 +27,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               const SizedBox(height: 64,),
               InkWell(
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const homePage()
+                    builder: (context) => const HomePage()
                 )),
                 child: const Image(
                   image: AssetImage('assets/logo.png'),
@@ -84,7 +86,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                         size: 28,
                       )
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   IconButton(
                       onPressed: () {},
                       icon: const FaIcon(
@@ -93,7 +95,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                         size: 28,
                       )
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   IconButton(
                       onPressed: () {},
                       icon: const FaIcon(
@@ -145,27 +147,27 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const homePage()
+            builder: (context) => const HomePage()
         ));
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const profil()
+            builder: (context) => const Profil()
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const addRessource()
+            builder: (context) => const AddRessource()
         ));
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const categoryPage()
+            builder: (context) => const CategoryPage()
         ));
         break;
       case 4:
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const faq()
+            builder: (context) => const Faq()
         ));
         break;
     }

@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class getFileInfo {
+class GetFileInfo {
   static const _keyFileInfo = 'file_key';
   static SharedPreferences _preferences = SharedPreferences.getInstance() as SharedPreferences;
 

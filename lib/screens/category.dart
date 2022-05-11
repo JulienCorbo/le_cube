@@ -3,22 +3,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/widgets/navigationDrawer.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/widgets/navigation_drawer.dart';
 
-class categoryPage extends StatefulWidget {
-  const categoryPage({Key? key}) : super(key: key);
+class CategoryPage extends StatefulWidget {
+  const CategoryPage({Key? key}) : super(key: key);
 
   @override
-  _categoryPageState createState() => _categoryPageState();
+  _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _categoryPageState extends State<categoryPage> {
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+class _CategoryPageState extends State<CategoryPage> {
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        endDrawer: NavigationDrawerWidget(),
+        endDrawer: const NavigationDrawerWidget(),
         backgroundColor: whiteBackground,
         key: _globalKey,
         body: LayoutBuilder(
@@ -54,7 +53,7 @@ class _categoryPageState extends State<categoryPage> {
                             ],
                             mainAxisAlignment: MainAxisAlignment.end,
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             "CATEGORIES",
                             textAlign: TextAlign.center,

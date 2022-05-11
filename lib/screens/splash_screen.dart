@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/home_page.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 5350));
 
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const homePage()
+        builder: (context) => const HomePage()
     ));
   }
   @override

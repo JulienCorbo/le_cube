@@ -28,14 +28,10 @@ Future<int> createAlbum(BuildContext context,String name, String firstname, Stri
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const Login()
     ));
-    print(response.body);
     return 1;
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    int statuscode = response.statusCode;
-    print('Code : ' + statuscode.toString());
-    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
@@ -64,21 +60,20 @@ class Album {
 }
 
 
-class signup extends StatefulWidget {
-  const signup({Key? key}) : super(key: key);
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
 
   @override
-  _signupState createState() => _signupState();
+  _SignupState createState() => _SignupState();
 }
 
-class _signupState extends State<signup> {
+class _SignupState extends State<Signup> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordConfirmationController = TextEditingController();
   String error = '';
-  Future<int>? _futureAlbum;
 
   @override
   Widget build(BuildContext context) {
@@ -183,13 +178,6 @@ class _signupState extends State<signup> {
                   onPressed: () {
                     if (_form.currentState!.validate()) {
                       setState(() {
-                        _futureAlbum = createAlbum(
-                            context,
-                            nameController.value.text,
-                            firstnameController.value.text,
-                            passwordController.value.text,
-                            emailController.value.text
-                        );
                       });
                     }
                   },

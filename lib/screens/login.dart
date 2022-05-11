@@ -5,9 +5,9 @@ import 'dart:convert';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/signup.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/home_page.dart';
 import 'package:le_cube/models/user.dart';
-import 'package:le_cube/utils/userInfo.dart';
+import 'package:le_cube/utils/user_info.dart';
 
 Future<int> logUser(BuildContext context, String pass, String mail) async {
   final response = await http.post(
@@ -27,7 +27,6 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
 
     final Map<String, dynamic> data = json.decode(response.body);
     final user = User.fromJson(data['res']);
-    print(response.body);
     UserInfo.setUserToken(user.token);
     UserInfo.setUserEmail(user.email);
     UserInfo.setUserFirstname(user.firstname);
@@ -36,14 +35,13 @@ Future<int> logUser(BuildContext context, String pass, String mail) async {
     UserInfo.setUserId(user.id);
 
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const homePage()
+        builder: (context) => const HomePage()
     ));
 
     return 1;
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
@@ -76,7 +74,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  Future<int>? _futureAlbum;
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +127,6 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     if (_form.currentState!.validate()) {
                       setState(() {
-                        _futureAlbum = logUser(
-                            context,
-                            passwordController.value.text,
-                            emailController.value.text.trim()
-                        );
                       });
                     }
                   },
@@ -146,7 +138,7 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const signup()),
+                      MaterialPageRoute(builder: (context) => const Signup()),
                     );
                   },
                   child: const Text('S\'INSCRIRE')

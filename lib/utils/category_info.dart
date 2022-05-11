@@ -11,15 +11,15 @@ class CategoryInfo {
       _preferences = await SharedPreferences.getInstance();
 
   //get & set Id
-  static Future setCategoryId(String CategoryId) async => await _preferences.setString(_keyCategoryId, CategoryId);
+  static Future setCategoryId(String categoryId) async => await _preferences.setString(_keyCategoryId, categoryId);
   static String getCategoryId() => _preferences.getString(_keyCategoryId).toString();
 
   //get & set Libelle
-  static Future setUserEmail(String UserEmail) async => await _preferences.setString(_keyCategoryLibelle, UserEmail);
+  static Future setUserEmail(String userEmail) async => await _preferences.setString(_keyCategoryLibelle, userEmail);
   static String getUserEmail() => _preferences.getString(_keyCategoryLibelle).toString();
 
   //get & set Icone
-  static Future setUserLastname(String UserLastname) async => await _preferences.setString(_keyCategoryIcone, UserLastname);
+  static Future setUserLastname(String userLastname) async => await _preferences.setString(_keyCategoryIcone, userLastname);
   static String getUserLastname() => _preferences.getString(_keyCategoryIcone).toString();
 
 

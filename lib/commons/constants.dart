@@ -10,7 +10,7 @@ final buttonWhite = ElevatedButton.styleFrom(
   ),
   primary: Colors.white,
   onPrimary: blueText,
-  fixedSize: Size(250, 50),
+  fixedSize: const Size(250, 50),
   shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20)
   )
@@ -23,7 +23,7 @@ final buttonAdd = ElevatedButton.styleFrom(
     ),
     primary: Colors.white,
     onPrimary: blueText,
-    fixedSize: Size(150, 50),
+    fixedSize: const Size(150, 50),
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)
     )
@@ -250,7 +250,7 @@ Widget categoryElement({
   )
 );
 
-void fav_button() {
+void favButton() {
 
 }
 

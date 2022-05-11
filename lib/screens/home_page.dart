@@ -1,26 +1,25 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:le_cube/screens/addRessource.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:le_cube/screens/add_ressource.dart';
 
 import 'package:le_cube/commons/constants.dart';
 import 'package:le_cube/screens/category.dart';
-import 'package:le_cube/models/user.dart';
-import 'package:le_cube/widgets/navigationDrawer.dart';
+import 'package:le_cube/widgets/navigation_drawer.dart';
 
 
 
-class homePage extends StatefulWidget {
-  const homePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _homePageState createState() => _homePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
 @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class _homePageState extends State<homePage> {
   return Scaffold(
         backgroundColor: whiteBackground,
         key: _globalKey,
-        endDrawer: NavigationDrawerWidget(),
+        endDrawer: const NavigationDrawerWidget(),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
@@ -78,7 +77,7 @@ class _homePageState extends State<homePage> {
                               style: buttonWhite,
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const addRessource()
+                                    builder: (context) => const AddRessource()
                                 ));
                               } ,
                               child: const Text('PARTAGER')
@@ -164,7 +163,7 @@ class _homePageState extends State<homePage> {
                     )
                   ),
                   const SizedBox(height: 20),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Column(
                       children: [
@@ -197,7 +196,7 @@ class _homePageState extends State<homePage> {
                             style: buttonBlue,
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const categoryPage()
+                                  builder: (context) => const CategoryPage()
                               ));
                               } ,
                             child: const Text('PLUS DE CATÉGORIES')

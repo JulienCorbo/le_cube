@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/widgets/navigationDrawer.dart';
+import 'package:le_cube/widgets/navigation_drawer.dart';
 import 'package:le_cube/screens/login.dart';
-import 'package:le_cube/utils/userInfo.dart';
+import 'package:le_cube/utils/user_info.dart';
 
 
 
-class profil extends StatefulWidget {
-  const profil({Key? key}) : super(key: key);
+class Profil extends StatefulWidget {
+  const Profil({Key? key}) : super(key: key);
 
   @override
-  _profilState createState() => _profilState();
+  _ProfilState createState() => _ProfilState();
 }
 
-class _profilState extends State<profil> {
+class _ProfilState extends State<Profil> {
   String token = '';
   String email = '';
   String firstname = '';
@@ -35,7 +35,7 @@ class _profilState extends State<profil> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _globalKey,
-        endDrawer: NavigationDrawerWidget(),
+        endDrawer: const NavigationDrawerWidget(),
         backgroundColor: whiteBackground,
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints viewportConstraints){

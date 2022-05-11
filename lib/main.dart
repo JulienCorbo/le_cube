@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:le_cube/screens/login.dart';
-import 'package:le_cube/utils/userInfo.dart';
+import 'package:le_cube/utils/user_info.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

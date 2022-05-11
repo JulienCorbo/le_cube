@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/widgets/navigationDrawer.dart';
+import 'package:le_cube/widgets/navigation_drawer.dart';
 
-class faq extends StatefulWidget {
-  const faq({Key? key}) : super(key: key);
+class Faq extends StatefulWidget {
+  const Faq({Key? key}) : super(key: key);
 
   @override
-  _faqState createState() => _faqState();
+  _FaqState createState() => _FaqState();
 }
 
-class _faqState extends State<faq> {
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+class _FaqState extends State<Faq> {
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _globalKey,
-        endDrawer: NavigationDrawerWidget(),
+        endDrawer: const NavigationDrawerWidget(),
         backgroundColor: whiteBackground,
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints viewportConstraints){
@@ -52,7 +52,7 @@ class _faqState extends State<faq> {
                               ],
                               mainAxisAlignment: MainAxisAlignment.end,
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               "F.A.Q",
                               textAlign: TextAlign.center,

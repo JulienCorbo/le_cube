@@ -1,22 +1,16 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:le_cube/screens/category.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:le_cube/commons/constants.dart';
-import 'package:le_cube/utils/fileInfo.dart';
-import 'package:le_cube/utils/userInfo.dart';
-import 'package:le_cube/widgets/navigationDrawer.dart';
+import 'package:le_cube/widgets/navigation_drawer.dart';
 import 'package:le_cube/models/category.dart';
-import 'package:le_cube/models/file.dart';
-import 'package:le_cube/screens/homePage.dart';
+import 'package:le_cube/screens/home_page.dart';
 
 Future<String> sendFile(BuildContext context, String filePath, String fileName) async {
-  String key = '';
   var uri = Uri.parse('https://ressource-relationnelle.herokuapp.com/upload');
   var request = http.MultipartRequest('POST', uri)
     ..files.add(await http.MultipartFile.fromPath('file', filePath, filename: fileName));
@@ -28,9 +22,7 @@ Future<String> sendFile(BuildContext context, String filePath, String fileName) 
         return keyFile;
       }
     });
-  }).catchError((err) => print('error : '+err.toString()))
-      .whenComplete(()
-  {});
+  });
   return '';
 }
 
@@ -53,30 +45,28 @@ Future<int> sendRessources(BuildContext context, String title, int idCategory, S
 
   if (response.statusCode == 200) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const homePage()
+        builder: (context) => const HomePage()
     ));
-    print(response.body);
     return 1;
   } else {
-    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
 
 
-class addRessource extends StatefulWidget {
-  const addRessource({Key? key}) : super(key: key);
+class AddRessource extends StatefulWidget {
+  const AddRessource({Key? key}) : super(key: key);
 
   @override
-  _addRessourceState createState() => _addRessourceState();
+  _AddRessourceState createState() => _AddRessourceState();
 }
 
-class _addRessourceState extends State<addRessource> {
+class _AddRessourceState extends State<AddRessource> {
   bool fileIsPicked = false;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  List<ressourceCategory> categoryList = List<ressourceCategory>.empty();
-  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  List<RessourceCategory> categoryList = List<RessourceCategory>.empty();
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   String? dropDownValue = 'Art';
   int categoryChoose = 0;
   bool friendChecked = false;
@@ -86,10 +76,9 @@ class _addRessourceState extends State<addRessource> {
   String fileChooseName = '';
   String fileKey = '';
   String pathFile = '';
-  Future<int>? _futureAlbum;
 
-  List _selecteRelation = [];
-  Map<String, dynamic> _relation = {
+  final List _selecteRelation = [];
+  final Map<String, dynamic> _relation = {
     "responseBody": [
       {"relation_id": "0", "relation_name": "Amis"},
       {"relation_id": "1", "relation_name": "Parent"},
@@ -97,22 +86,18 @@ class _addRessourceState extends State<addRessource> {
     "Total" : 2
   };
 
-  void _onRelationSelected(bool? selected, relation_name) {
+  void _onRelationSelected(bool? selected, relationName) {
     if (selected == true) {
       setState(() {
-        _selecteRelation.add(relation_name);
+        _selecteRelation.add(relationName);
       });
     } else {
       setState(() {
-        _selecteRelation.remove(relation_name);
+        _selecteRelation.remove(relationName);
       });
     }
   }
 
-  int _findCategoryId(List<String> items, String category){
-    categoryChoose = items.indexWhere((element) => element == category);
-    return categoryChoose;
-  }
 
   List<String> items = [
     "Art",
@@ -128,11 +113,12 @@ class _addRessourceState extends State<addRessource> {
     "Autre",
   ];
 
+  @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> _form = GlobalKey<FormState>();
     return Scaffold(
         key: _globalKey,
-        endDrawer: NavigationDrawerWidget(),
+        endDrawer: const NavigationDrawerWidget(),
         body: LayoutBuilder(
             builder: (BuildContext context,
                 BoxConstraints viewportConstraints) {
@@ -169,7 +155,7 @@ class _addRessourceState extends State<addRessource> {
                                   ],
                                   mainAxisAlignment: MainAxisAlignment.end,
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Text(
                                   "AJOUT D'UNE RESSOURCE",
                                   textAlign: TextAlign.center,
@@ -250,7 +236,7 @@ class _addRessourceState extends State<addRessource> {
                                               });
                                             }
                                           },
-                                          child: Text('+')
+                                          child: const Text('+')
                                       ),
                                       const SizedBox(width: double.infinity),
                                       Text(
@@ -266,7 +252,7 @@ class _addRessourceState extends State<addRessource> {
                                       ),
                                       SizedBox(
                                         child: ListView.builder(
-                                            padding: EdgeInsets.all(0.0),
+                                            padding: const EdgeInsets.all(0.0),
                                             physics: const NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: _relation['Total'],
@@ -315,17 +301,6 @@ class _addRessourceState extends State<addRessource> {
                                                     fileChoose,
                                                     fileChooseName
                                                 );
-                                                print('KEEEY : ' + keyFile);
-                                                _futureAlbum = sendRessources(
-                                                    context,
-                                                    titleController.value.text,
-                                                    _findCategoryId(items, dropDownValue!),
-                                                    descriptionController.value.text,
-                                                    UserInfo.getUserId(),
-                                                    _selecteRelation,
-                                                    keyFile
-                                                );
-                                                print('finito');
                                                 keyFile = '';
                                               });
                                             }

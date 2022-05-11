@@ -7,21 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'dart:convert';
 
-import 'package:le_cube/main.dart';
-import 'package:le_cube/models/user.dart';
 import 'package:le_cube/screens/login.dart';
-import 'package:le_cube/utils/userInfo.dart';
 
 void main() {
   testWidgets('Connexion utilisateur', (WidgetTester tester) async {
-
-    int build(BuildContext context) {
-      logUser(context, "test", "augustin@gmail.com").then((result) async {
-        print('La connexion est bonne man ;)');
-      });
-      return 1;
-    }
+    await tester.pumpWidget(const Login());
+    await tester.enterText(find.byTooltip("MAIL"), "augustin@gmail.com");
+    await tester.enterText(find.byTooltip("MOT DE PASSE"), "test");
+    await tester.tap(find.byWidget(const Text("CONNEXION")));
   });
 }
