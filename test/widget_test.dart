@@ -7,9 +7,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'dart:convert';
 
 import 'package:le_cube/main.dart';
+import 'package:le_cube/models/user.dart';
+import 'package:le_cube/screens/login.dart';
+import 'package:le_cube/utils/userInfo.dart';
 
 void main() {
+  testWidgets('Connexion utilisateur', (WidgetTester tester) async {
+    int build(BuildContext context) {
+      logUser(context, "test", "augustin@gmail.com");
+      return 1;
+    }
 
+
+
+  });
 }
