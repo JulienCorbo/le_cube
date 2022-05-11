@@ -15,6 +15,12 @@ dependencies:
     sdk: flutter
   google_fonts: ^2.3.1
   cupertino_icons: ^1.0.2
+  carousel_slider: ^4.0.0
+  video_player: ^2.2.19
+  font_awesome_flutter: ^9.2.0
+  form_validator: ^1.0.2
+  shared_preferences: ^2.0.13
+  file_picker: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -28,4 +34,7 @@ flutter:
 
   assets:
     - assets/logo.png
+    - assets/hand_fond.png
+    - splashscreen.mp4
+    - pres_RR.jpg
 
