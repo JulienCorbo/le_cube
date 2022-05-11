@@ -12,7 +12,7 @@ import 'package:le_cube/screens/login.dart';
 
 void main() {
   testWidgets('Connexion utilisateur', (WidgetTester tester) async {
-    await tester.pumpWidget(const Login());
+    await tester.pumpWidget(const MaterialApp(home:Login()));
     await tester.enterText(find.byTooltip("MAIL"), "augustin@gmail.com");
     await tester.enterText(find.byTooltip("MOT DE PASSE"), "test");
     await tester.tap(find.byWidget(const Text("CONNEXION")));
