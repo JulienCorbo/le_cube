@@ -5,16 +5,22 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 
-import 'package:le_cube/screens/login.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:le_cube/models/user.dart';
+
 
 void main() {
-  testWidgets('Connexion utilisateur', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home:Login()));
-    await tester.enterText(find.byTooltip("MAIL"), "augustin@gmail.com");
-    await tester.enterText(find.byTooltip("MOT DE PASSE"), "test");
-    await tester.tap(find.byWidget(const Text("CONNEXION")));
+  test('Enregistrement des infos utilisateurs', ()  {
+    final Map<String, dynamic> data = {
+      "accesToken": "token",
+      "email": "test@gmail.com",
+      "nom": "nom_test",
+      "prenom": "prenom_test",
+      "roles": "role_test",
+      "id": "id_test"
+    };
+    final user = User.fromJson(data);
+    expect(user.email, "test@gmail.com");
   });
 }
