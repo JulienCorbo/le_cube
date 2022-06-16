@@ -142,6 +142,7 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 10,),
               TextFormField(
+                validator: ValidationBuilder().minLength(10).build(),
                 textInputAction: TextInputAction.next,
                 obscureText: true,
                 controller: passwordController,
